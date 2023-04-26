@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container" id="signin">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card my-5">
+                    <form class="card-body cardbody-color p-lg-5" method="post" action="login.php">
+                        <div class="text-center">
+                            <h2 class="text-center text-dark mt-5">Iniciar Sessió</h2>
+                            <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px" alt="profile">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Correu electrònic..." value="gerardfernandez2002@ginebro.cat">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contrasenya..." value="1234">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                        <div id="emailHelp" class="form-text text-center mb-5 text-dark">No Registrat? <a id="singinbutton" class="text-dark fw-bold"> Crear un
+                    Compte</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="signup" style="display: none;">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card my-5">
+                    <form class="card-body cardbody-color p-lg-5" id="formsingup" method="post" action="registrer.php">
+                        <div class="text-center">
+                            <h2 class="text-center text-dark mt-5">Registrar Nou Usuari</h2>
+                            <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px" alt="profile">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="nom" name="nom" aria-describedby="nomHelp" placeholder="Nom..." required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Correu electrònic..." required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="pass" name="pass" placeholder="Contrasenya..." required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="repass" name="repass" placeholder="Posa un altre cop la contrasenya..." required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                            <span id="spanNom"></span>
+                            <span id="spanpass"></span>
+                        </div>
+                        <div id="emailHelp" class="form-text text-center mb-5 text-dark">
+                            <a id="singupbutton" class="text-dark fw-bold">Iniciar Sessió</a>
+                        </div>
+                        <span id="nomNoti"></span><br>
+                        <span id="contraNoti"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="index.js"></script>
+
+</html>

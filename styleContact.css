@@ -1,0 +1,47 @@
+#jum {
+    background-image: url("https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/buildawebsite.jpg");
+}
+
+nav {
+    background-color: purple;
+    width: 100%;
+}
+
+#navbarSupportedContent {
+    padding-left: 35%;
+}
+
+#imagenconcact {
+    width: 100%;
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.navbar li {
+    display: inline-block;
+    margin: 0;
+}
+
+#containerSobreMi {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+#footer {
+    background-color: purple;
+    margin: 0;
+}
+
+.enllaçoslegals {
+    color: white;
+    text-decoration: none;
+}
+
+.enllaçoslegals:hover {
+    text-decoration: none;
+}

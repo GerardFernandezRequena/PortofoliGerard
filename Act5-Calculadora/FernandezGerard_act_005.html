@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="FernandezGerard_act_005.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <title>Calculadora</title>
+</head>
+<header id="nav"></header>
+<body>
+    <div class="borde">
+        <h3><b>Calculadora ()</b></h3>
+        <input class="input" name="" value="" size="23" readonly id="input"></input>
+        <div class="Botons">
+            <ul>
+                <li>
+                    <button class="color" onclick="borrar()">C</button>
+                    <button id="cambiar" onclick="appearCientifica()">Cientifica</button>
+                    <button class="color" onclick="operacio(this)">+</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button onclick="introNumero(this)">7</button>
+                    <button onclick="introNumero(this)">8</button>
+                    <button onclick="introNumero(this)">9</button>
+                    <button class="color" onclick="operacio(this)">-</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button onclick="introNumero(this)">4</button>
+                    <button onclick="introNumero(this)">5</button>
+                    <button onclick="introNumero(this)">6</button>
+                    <button class="color" onclick="operacio(this)">*</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button onclick="introNumero(this)">1</button>
+                    <button onclick="introNumero(this)">2</button>
+                    <button onclick="introNumero(this)">3</button>
+                    <button class="color" onclick="operacio(this)">/</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button onclick="introNumero(this)">0</button>
+                    <button onclick="introNumero(this)">.</button>
+                    <button class="color" onclick="mesMenys()">+/-</button>
+                    <button class="color" onclick="operacio(this)">=</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="borde2" id="cientifica">
+        <div>
+            <ul>
+                <li>
+                    <button onclick="introNumero(this)" class="color2">e</button>
+                    <button onclick="introNumero(this)" class="color2">π</button>
+                    <button onclick="operacio(this)" class="color2">Ln 10</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button onclick="operacio(this)" class="color2">Sinus</button>
+                    <button onclick="operacio(this)" class="color2">Cosinus</button>
+                    <button onclick="operacio(this)" class="color2">Tangent</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button onclick="operacio(this)" class="color2">ASinus</button>
+                    <button onclick="operacio(this)" class="color2">Secant</button>
+                    <button onclick="operacio(this)" class="color2">Cotangent</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button onclick="arrodonirDalt()" class="color2">Arrod ↑</button>
+                    <button onclick="arrodonirMitg()" class="color2">Arrod →</button>
+                    <button onclick="arrodonirBaix()" class="color2">Arrod ↓</button>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <button onclick="operacio(this)" class="color2">Logartime</button>
+                    <button onclick="operacio(this)" class="color2">xº</button>
+                    <button onclick="operacio(this)" class="color2">√</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <script src="FernandezGerard_act_005.js"></script>
+    <script src="../public/js/afegirMenu2.js" id="afegirNavegacio"></script>
+</body>
+
+</html>

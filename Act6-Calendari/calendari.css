@@ -1,0 +1,126 @@
+html,
+body {
+    margin: 0px;
+    height: 100%;
+}
+
+#calendari {
+    width: 100%;
+}
+
+caption {
+    height: 40px;
+    line-height: 40px;
+    font-size: 150%;
+}
+
+.next {
+    position: absolute;
+    margin-top: -12px;
+    margin-left: 55%;
+    margin-right: 30%;
+}
+
+.prev {
+    position: absolute;
+    margin-top: -5px;
+    margin-left: 41.7%;
+    margin-right: 30%;
+}
+
+thead {
+    background-color: gray;
+    color: white;
+    padding-bottom: 50%;
+}
+
+tbody {
+    background-color: white;
+    color: black;
+}
+
+td {
+    width: 10%;
+    text-align: center;
+}
+
+.vermell {
+    background-color: rgba(255, 0, 0, 0.486);
+    width: 10%;
+    padding-bottom: 10px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.blau {
+    background-color: rgba(0, 162, 255, 0.555);
+    width: 10%;
+    padding-bottom: 10px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.noteStyle {
+    border: dotted 2px white;
+}
+
+.verd {
+    background-color: rgba(4, 214, 14, 0.486);
+    width: 10%;
+    padding-bottom: 10px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.white {
+    background-color: white;
+    color: white;
+    width: 10%;
+    padding-bottom: 10px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.greyNotes {
+    justify-content: center;
+    align-items: center;
+    display: none;
+    border: solid;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.459);
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.whiteNotes {
+    background-color: white;
+    border-radius: 25px;
+    border: solid;
+    display: flex;
+    width: 400px;
+    height: 200px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.boto {
+    margin-top: 2px;
+    background-color: white;
+    border-radius: 5px;
+    border: solid 1px;
+}
+
+.inputnota {
+    margin-top: -20px;
+    background-color: white;
+    border-radius: 4px;
+    border: solid 1px;
+}
+
+.diaclicat {
+    text-align: center;
+    margin-top: -20px;
+}
