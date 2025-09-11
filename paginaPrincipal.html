@@ -10,31 +10,26 @@
 
     <!-- Preload de recursos críticos -->
     <link rel="preload" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="./stylepaginaPrincipal.css" as="style">
+    <link rel="preload" href="./assets/css/style.css" as="style">
+
+    <!-- Preconnect para fuentes externas optimizadas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://maxcdn.bootstrapcdn.com">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
 
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="./stylepaginaPrincipal.css">
-
-    <!-- Preconnect para fuentes externas -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="./assets/css/stylepaginaPrincipal.css">
 </head>
 
 <body>
-    <!-- Cabecera -->
-    <header id="jum" class="jumbotron text-center mb-0">
-        <h1 class="h3">Benvingut al meu portafoli! <span aria-hidden="true">&#128075;</span></h1>
-        <p class="lead">Pren riscos i prepara't per fallar <span aria-hidden="true">&#128170;&#127760;</span></p>
-    </header>
-
     <!-- Navegación principal -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-main">
         <div class="container">
             <a class="navbar-brand" href="./paginaPrincipal.html">Portafoli</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -45,8 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="./paginaPrincipal.html">Inici <span
-                                class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="./paginaPrincipal.html">Inici</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./About.html">Sobre mi</a>
@@ -85,16 +79,22 @@
         </div>
     </nav>
 
+    <!-- Cabecera -->
+    <header class="jumbotron jumbotron-hero text-center mb-0">
+        <h1 class="display-4">Benvingut al meu portafoli! <span aria-hidden="true">&#128075;</span></h1>
+        <p class="lead">Pren riscos i prepara't per fallar <span aria-hidden="true">&#128170;&#127760;</span></p>
+    </header>
+
     <!-- Contenido principal -->
     <main class="container my-4">
         <div class="row">
             <!-- Columna izquierda -->
             <aside class="col-md-4 mb-4">
-                <section>
-                    <h2 class="h4">Sobre mi <span aria-hidden="true">👤</span></h2>
+                <section class="card card-custom p-4 h-100">
+                    <h2 class="h4 section-heading">Sobre mi <span aria-hidden="true">👤</span></h2>
                     <figure>
-                        <img id="imaOrde" src="./img/imagenOrde.jpg"
-                            alt="Gerard Fernández treballant en el seu ordinador" class="img-fluid rounded mb-3">
+                        <img src="./assets/img/imagenOrde.jpg" alt="Gerard Fernández treballant en el seu ordinador"
+                            class="img-fluid img-portfolio img-profile rounded">
                     </figure>
                     <p>Em considero algú que aconsegueix el que es proposa, ja que crec que els èxits són resultats de
                         les decisions que es prenen...</p>
@@ -102,53 +102,57 @@
                             aria-label="Llegir més sobre Gerard Fernández">Sobre mi</a>".</p>
                 </section>
 
-                <section>
-                    <h2 class="h4">Contacta amb mi <span aria-hidden="true">📲</span></h2>
-                    <a href="./Contact.html" class="btn btn-info btn-lg btn-block" role="button"
+                <section class="card card-custom p-4 mt-4">
+                    <h2 class="h4 section-heading">Contacta amb mi <span aria-hidden="true">📲</span></h2>
+                    <a href="./Contact.html" class="btn btn-portfolio btn-lg btn-block" role="button"
                         aria-label="Contactar amb Gerard Fernández">Contacte</a>
                 </section>
             </aside>
 
             <!-- Columna derecha -->
             <div class="col-md-8">
-                <article class="mb-5">
+                <article class="card card-custom p-4 mb-4 animate-fadein">
                     <header>
                         <h3 class="h5">Operacions amb 2 nombres <span aria-hidden="true">➕➖✖️➗</span></h3>
                         <time datetime="2020-09-22">22 de setembre de 2020</time>
                     </header>
                     <figure class="my-3">
-                        <img class="img-fluid rounded" src="./img/calculadora.png"
-                            alt="Captura de pantalla de la calculadora">
+                        <img class="img-fluid img-portfolio img-project rounded" src="./assets/img/calculadora.png"
+                            alt="Captura de pantalla de la calculadora mostrant operacions matemàtiques">
                     </figure>
                     <p>Calculadora amb dos nombres fet amb HTML, CSS i JavaScript.</p>
+                    <a href="./FernandezGerard_act_001/FernandezGerard_act_001.html" class="btn btn-portfolio">Veure
+                        projecte</a>
                 </article>
 
-                <article class="mb-5">
+                <article class="card card-custom p-4 mb-4 animate-fadein">
                     <header>
                         <h3 class="h5">Rellotge <span aria-hidden="true">⌚</span></h3>
                         <time datetime="2020-09-27">27 de setembre de 2020</time>
                     </header>
                     <figure class="my-3">
-                        <img class="img-fluid rounded" src="./img/reloj.png"
-                            alt="Captura de pantalla del rellotge digital">
+                        <img class="img-fluid img-portfolio img-project rounded" src="./assets/img/reloj.png"
+                            alt="Captura de pantalla del rellotge digital mostrant la hora actual">
                     </figure>
                     <p>Rellotge digital amb HTML, CSS i JavaScript.</p>
+                    <a href="./FernandezGerard_Act_002/FernandezGerard_Act_002.html" class="btn btn-portfolio">Veure
+                        projecte</a>
                 </article>
             </div>
         </div>
     </main>
 
     <!-- Pie de página -->
-    <footer class="jumbotron text-center mb-0" id="footer">
+    <footer class="footer-main">
         <div class="container">
             <nav aria-label="Enllaços legals">
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a class="text-dark" href="cookies.html">Política de Cookies</a></li>
-                    <li class="list-inline-item"><span aria-hidden="true">|</span></li>
-                    <li class="list-inline-item"><a class="text-dark" href="avisoLegal.html">Avís legal i termes
+                <ul class="list-inline text-center mb-0">
+                    <li class="list-inline-item"><a class="footer-link" href="cookies.html">Política de Cookies</a></li>
+                    <li class="list-inline-item"><span class="separator" aria-hidden="true">|</span></li>
+                    <li class="list-inline-item"><a class="footer-link" href="avisoLegal.html">Avís legal i termes
                             d'ús</a></li>
-                    <li class="list-inline-item"><span aria-hidden="true">|</span></li>
-                    <li class="list-inline-item"><a class="text-dark" href="privacidad.html">Privadesa</a></li>
+                    <li class="list-inline-item"><span class="separator" aria-hidden="true">|</span></li>
+                    <li class="list-inline-item"><a class="footer-link" href="privacidad.html">Privadesa</a></li>
                 </ul>
             </nav>
         </div>
@@ -158,6 +162,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./assets/js/paginaPrincipal.js"></script>
 </body>
 
 </html>
