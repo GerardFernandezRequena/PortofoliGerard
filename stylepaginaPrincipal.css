@@ -1,56 +1,202 @@
+/* ===== Variables ===== */
+:root {
+  --primary-color: #6a1b9a;
+  /* Purple */
+  --primary-dark: #4a148c;
+  --primary-light: #9c4dff;
+  --gray-light: #f5f5f5;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --section-padding: 2rem;
+  --image-border-radius: 8px;
+  --image-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* ===== Base Styles ===== */
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== Hero Section ===== */
 #jum {
-    background-image: url("https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/buildawebsite.jpg");
+  background-image: url("https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/buildawebsite.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text-light);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 4rem 1rem;
+  position: relative;
+  margin-bottom: 0;
 }
 
-.fakeimg {
-    height: 200px;
-    background: #aaa;
+#jum::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right,
+      rgba(106, 27, 154, 0.7),
+      rgba(74, 20, 140, 0.9));
+  z-index: 1;
 }
 
+#jum h3 {
+  position: relative;
+  z-index: 2;
+  margin: 0.5rem 0;
+}
+
+/* ===== Navigation ===== */
 nav {
-    background-color: purple;
-    width: 100%;
+  background-color: var(--primary-color);
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-#navbarSupportedContent {
-    padding-left: 35%;
-}
-
-#imagenGero {
-    width: 80%;
+.navbar {
+  padding: 0.5rem 0;
 }
 
 .navbar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .navbar li {
-    display: inline-block;
-    margin: 0;
+  margin: 0 0.5rem;
 }
 
-#imaOrde {
-    width: 100%;
-    padding: 3%;
+.nav-link {
+  color: var(--text-light);
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+  display: block;
+  transition: var(--transition);
+  border-radius: 4px;
 }
 
-#footer {
-    background-color: purple;
-    margin: 0;
+.nav-link:hover {
+  background-color: var(--primary-dark);
+  text-decoration: none;
+}
+
+.active .nav-link {
+  background-color: var(--primary-dark);
+  font-weight: 500;
+}
+
+/* ===== Images ===== */
+#imagenGero,
+#imaOrde,
+.imga {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: var(--image-border-radius);
+  box-shadow: var(--image-shadow);
+  transition: transform 0.3s ease;
+}
+
+#imagenGero {
+  width: 80%;
 }
 
 .imga {
-    width: 80%;
+  width: 80%;
+}
+
+#imaOrde {
+  width: 100%;
+  padding: 3%;
+  object-fit: cover;
+}
+
+.fakeimg {
+  height: 200px;
+  background: var(--gray-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--image-border-radius);
+  margin: 1rem 0;
+}
+
+/* ===== Footer ===== */
+#footer {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  text-align: center;
 }
 
 .enllaçoslegals {
-    color: white;
-    text-decoration: none;
+  color: var(--text-light);
+  text-decoration: none;
+  margin: 0 1rem;
+  padding: 0.5rem;
+  transition: var(--transition);
+  display: inline-block;
 }
 
 .enllaçoslegals:hover {
-    text-decoration: none;
+  color: var(--text-light);
+  text-decoration: underline;
+  transform: translateY(-2px);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 992px) {
+  #navbarSupportedContent {
+    padding-left: 0;
+  }
+
+  #imagenGero,
+  .imga {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  #jum {
+    padding: 3rem 1rem;
+    background-attachment: scroll;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar li {
+    width: 100%;
+    text-align: center;
+    margin: 0.25rem 0;
+  }
+
+  .nav-link {
+    padding: 0.5rem;
+  }
+
+  .enllaçoslegals {
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  #imagenGero,
+  .imga {
+    width: 100%;
+  }
 }
