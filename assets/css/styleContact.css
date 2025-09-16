@@ -1,0 +1,357 @@
+/* Variables CSS para colores y tamaños */
+:root {
+  --primary-color: #4e54c8;
+  --primary-dark: #3f43a7;
+  --primary-light: #6a70e3;
+  --gradient-start: #4e54c8;
+  --gradient-end: #8f94fb;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --text-muted: #6c757d;
+  --section-padding: 3rem;
+  --container-max-width: 1200px;
+  --border-radius: 12px;
+  --transition: all 0.3s ease;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos generales */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+/* Cabecera hero */
+#jum {
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  padding: 5rem 1rem;
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#jum::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: bottom;
+}
+
+#jum .container {
+  position: relative;
+  z-index: 2;
+}
+
+#jum h1 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+#jum .lead {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+/* Barra de navegación */
+.navbar {
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  padding: 0.8rem 1rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.nav-link {
+  color: var(--text-light) !important;
+  padding: 0.5rem 1rem;
+  transition: var(--transition);
+  text-decoration: none;
+  display: block;
+  font-weight: 500;
+  border-radius: 4px;
+  margin: 0 2px;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-light);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.active .nav-link {
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-menu {
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.dropdown-item {
+  transition: var(--transition);
+}
+
+.dropdown-item:hover {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+/* Contenedor principal */
+#containerSobreMi {
+  padding: var(--section-padding) 0;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.card {
+  border: none;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow);
+}
+
+.card-header {
+  border-bottom: none;
+}
+
+/* Formulario */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1rem;
+  border: 1px solid #e1e5eb;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 0.2rem rgba(78, 84, 200, 0.25);
+}
+
+.input-group-text {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(78, 84, 200, 0.4);
+}
+
+/* Información de contacto */
+.media-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.media:hover .media-icon {
+  transform: scale(1.1);
+}
+
+.media-body a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.media-body a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Botones sociales */
+.social-btn {
+  border-radius: 50px;
+  padding: 0.5rem 1.25rem;
+  transition: var(--transition);
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Mapa */
+.embed-responsive {
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+/* Pie de página */
+#footer {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: var(--text-light);
+  padding: 3rem 0 2rem;
+  margin-top: var(--section-padding);
+}
+
+#footer h5 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+#footer p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-links {
+  margin-bottom: 1rem;
+}
+
+.enllaçoslegals {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.enllaçoslegals:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+#footer .social-links a {
+  color: rgba(255, 255, 255, 0.8);
+  transition: var(--transition);
+  display: inline-block;
+}
+
+#footer .social-links a:hover {
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* Utilidades */
+.shadow-lg {
+  box-shadow: var(--box-shadow) !important;
+}
+
+.border-0 {
+  border: none !important;
+}
+
+/* Media Queries para responsive design */
+@media (max-width: 992px) {
+  #navbarSupportedContent {
+    padding-left: 0;
+  }
+
+  #containerSobreMi {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #jum {
+    padding: 3rem 1rem;
+  }
+
+  #jum .display-4 {
+    font-size: 2.5rem;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar li {
+    margin: 0.3rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .enllaçoslegals {
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  #footer .row>div {
+    margin-bottom: 2rem;
+  }
+
+  #footer .row>div:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .social-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .social-btn:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Estados de formulario */
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.is-invalid:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
