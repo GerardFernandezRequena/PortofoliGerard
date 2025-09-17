@@ -1,167 +1,345 @@
-'use strict';
-const timer = document.getElementById('stopwatch');
-let sec = 0;
-let min = 0;
-let actualSeconds = 0;
-let actualMinutes = 0;
-let stoptime = true;
-let jaHaGuanyat = false;
+document.addEventListener('DOMContentLoaded', function () {
+  // Referencias a elementos del DOM
+  const timer = document.getElementById('stopwatch');
+  const puzzleBoard = document.getElementById('puzzle-board');
+  const resetBtn = document.getElementById('reset-btn');
+  const shuffleBtn = document.getElementById('shuffle-btn');
+  const winMessage = document.getElementById('win-message');
+  const movesCount = document.getElementById('moves-count');
+  const easyBtn = document.getElementById('easy-btn');
+  const mediumBtn = document.getElementById('medium-btn');
+  const hardBtn = document.getElementById('hard-btn');
 
-let matriu = [
-  [1, 2, 3],
-  [4, 0, 6],
-  [7, 5, 8]
-];
-// let filaBuida = 1;
-// let coluBuida = 1;
-let mida = 3;
+  // URLs de las imágenes (reemplaza con tus propias URLs)
+  const imageUrls = [
+    './img/0.png', // Celda vacía (0)
+    './img/1.png', // 1
+    './img/2.png', // 2
+    './img/3.png', // 3
+    './img/4.png', // 4
+    './img/5.png', // 5
+    './img/6.png', // 6
+    './img/7.png', // 7
+    './img/8.png'  // 8
+  ];
 
-window.onload = ompleMatriuHTML();
+  // Estado del juego
+  let gameState = {
+    matrix: [
+      [1, 2, 3],
+      [4, 0, 6],
+      [7, 5, 8]
+    ],
+    emptyCell: { row: 1, col: 1 },
+    size: 3,
+    isRunning: false,
+    hasWon: false,
+    seconds: 0,
+    minutes: 0,
+    moves: 0,
+    timerInterval: null,
+    difficulty: 'easy'
+  };
 
-function mostraMatriu() {
-  for (let i = 0; i < mida; i++) {
-    console.log('|' + matriu[i][0] + '|' + matriu[i][1] + '|' + matriu[i][2] + '|');
+  // Inicializar el juego
+  initializeGame();
 
+  // Configurar event listeners para botones de dificultad
+  easyBtn.addEventListener('click', () => setDifficulty('easy'));
+  mediumBtn.addEventListener('click', () => setDifficulty('medium'));
+  hardBtn.addEventListener('click', () => setDifficulty('hard'));
+
+  // Inicializar el juego
+  function initializeGame() {
+    createPuzzleBoard();
+    setupEventListeners();
+    renderBoard();
+    updateMovesDisplay();
   }
-}
-/*
-var x = document.getElementById("myBtn");
-x.addEventListener("mouseover", fMouseOver);
-x.addEventListener("click", fClick);
-x.addEventListener("mouseout", fMouseOut);
- */
 
-function ompleMatriuHTML() {
-  let cellaAOmplir;
-  for (let i = 0; i < mida; i++) {
-    for (let j = 0; j < mida; j++) {
-      if (matriu[i][j]==0){
-        cellaAOmplir = document.getElementById("c" + i + j);
-        cellaAOmplir.src = 'img/' + matriu[i][j] + '.png';
-        cellaAOmplir.addEventListener("click", function () { canvia(this); startTimer(); ganar(); });
-      } else {
-        cellaAOmplir = document.getElementById("c" + i + j);
-        cellaAOmplir.src = 'img/' + matriu[i][j] + '.png';
-        cellaAOmplir.addEventListener("click", function () { canvia(this); startTimer(); ganar(); });
+  // Crear el tablero de puzzle
+  function createPuzzleBoard() {
+    puzzleBoard.innerHTML = '';
+
+    for (let i = 0; i < gameState.size; i++) {
+      for (let j = 0; j < gameState.size; j++) {
+        const cell = document.createElement('div');
+        cell.className = 'puzzle-cell';
+        cell.id = `c${i}${j}`;
+        cell.dataset.row = i;
+        cell.dataset.col = j;
+
+        const value = gameState.matrix[i][j];
+        if (value !== 0) {
+          const img = document.createElement('img');
+          img.src = imageUrls[value];
+          img.alt = `Número ${value}`;
+          cell.appendChild(img);
+        }
+
+        puzzleBoard.appendChild(cell);
       }
     }
   }
-}
 
-function obteCoorCelBuida() {
-  for (let i = 0; i < mida; i++) {
-    for (let j = 0; j < mida; j++) {
-      if (matriu[i][j] == 0) {
-        return ("c" + i + "f" + j);
-      };
+  // Configurar event listeners
+  function setupEventListeners() {
+    // Usar event delegation para las celdas
+    puzzleBoard.addEventListener('click', handleCellClick);
+
+    // Botones de control
+    resetBtn.addEventListener('click', resetGame);
+    shuffleBtn.addEventListener('click', shuffleTiles);
+  }
+
+  // Manejar clic en una celda
+  function handleCellClick(event) {
+    if (gameState.hasWon) return;
+
+    const cell = event.target.closest('.puzzle-cell');
+    if (!cell) return;
+
+    const row = parseInt(cell.dataset.row);
+    const col = parseInt(cell.dataset.col);
+
+    if (isAdjacent(row, col, gameState.emptyCell.row, gameState.emptyCell.col)) {
+      moveTile(row, col);
+      startTimer();
+      checkWin();
     }
   }
-}
 
-function esCorrecte() {
-  let comptador = 1;
-  for (let i = 0; i < mida; i++) {
-    for (let j = 0; j < mida; j++) {
-      if (matriu[i][j] != comptador) {
-        return false;
-      };
-      comptador++;
-    }
-  }
-  return true;
-}
+  // Renderizar el tablero
+  function renderBoard() {
+    for (let i = 0; i < gameState.size; i++) {
+      for (let j = 0; j < gameState.size; j++) {
+        const cell = document.getElementById(`c${i}${j}`);
+        const value = gameState.matrix[i][j];
 
-function canvia(objecte) {
-  if (jaHaGuanyat){
-    alert("Bro, ya has ganado, si quieres volver a jugar reinicia la pagina web");
-  } else {
-    let filaACanviar = objecte.id.substr(1, 1);
-    let coluACanviar = objecte.id.substr(2, 1);
+        if (value === 0) {
+          cell.classList.add('empty');
+          cell.innerHTML = '';
+        } else {
+          cell.classList.remove('empty');
 
-    let coorCellaBuida = obteCoorCelBuida();
-
-    let filaBuida = coorCellaBuida.substr(1, 1);
-    let coluBuida = coorCellaBuida.substr(3, 1);
-
-    if (adjacents(filaACanviar, coluACanviar, filaBuida, coluBuida)){
-
-      matriu[filaBuida][coluBuida]=matriu[filaACanviar][coluACanviar];
-      matriu[filaACanviar][coluACanviar]=0;
-
-      let cellaCanviar;
-      for (let i = 0; i < mida; i++) {
-        for (let j = 0; j < mida; j++) {
-            cellaCanviar = document.getElementById("c" + i + j);
-            cellaCanviar.src = 'img/' + matriu[i][j] + '.png';  
+          // Solo actualizar el contenido si es necesario
+          if (!cell.querySelector('img')) {
+            const img = document.createElement('img');
+            img.src = imageUrls[value];
+            img.alt = `Número ${value}`;
+            cell.innerHTML = '';
+            cell.appendChild(img);
+          }
         }
       }
     }
   }
-}
 
-function adjacents(fila1, colu1, fila2, colu2) {
-  let hoSon = false;
-  if ((fila1 == fila2) && (Math.abs(colu1 - colu2) == 1)) {
-    hoSon = true;
-  }
-  if ((colu1 == colu2) && (Math.abs(fila1 - fila2) == 1)) {
-    hoSon = true;
+  // Verificar si dos celdas son adyacentes
+  function isAdjacent(row1, col1, row2, col2) {
+    const rowDiff = Math.abs(row1 - row2);
+    const colDiff = Math.abs(col1 - col2);
+
+    return (rowDiff === 1 && colDiff === 0) || (rowDiff === 0 && colDiff === 1);
   }
 
-  return hoSon;
-};
+  // Mover una ficha
+  function moveTile(row, col) {
+    // Intercambiar valores
+    gameState.matrix[gameState.emptyCell.row][gameState.emptyCell.col] = gameState.matrix[row][col];
+    gameState.matrix[row][col] = 0;
 
-function startTimer() {
-  if (!jaHaGuanyat) {
-    if (stoptime) {
-      stoptime = false;
-      timerCycle();
+    // Actualizar celda vacía
+    gameState.emptyCell = { row, col };
+
+    // Incrementar contador de movimientos
+    gameState.moves++;
+    updateMovesDisplay();
+
+    // Renderizar cambios
+    renderBoard();
+  }
+
+  // Iniciar temporizador
+  function startTimer() {
+    if (!gameState.isRunning && !gameState.hasWon) {
+      gameState.isRunning = true;
+
+      gameState.timerInterval = setInterval(() => {
+        gameState.seconds++;
+
+        if (gameState.seconds === 60) {
+          gameState.minutes++;
+          gameState.seconds = 0;
+        }
+
+        updateTimerDisplay();
+      }, 1000);
     }
   }
-}
-function stopTimer() {
-  if (!stoptime) {
-    stoptime = true;
-    jaHaGuanyat = true;
+
+  // Detener temporizador
+  function stopTimer() {
+    if (gameState.isRunning) {
+      clearInterval(gameState.timerInterval);
+      gameState.isRunning = false;
+    }
   }
-}
-function timerCycle() {
-  if (stoptime == false) {
-    sec = parseInt(sec);
-    min = parseInt(min);
-    sec = sec + 1;
-    actualMinutes = min;
-    actualSeconds = sec;
 
-    if (sec == 60){
-      min = min + 1;
-      sec = 0;
-    }
-
-    if (sec < 10 || sec == 0) {
-      sec = '0' + sec;
-    }
-    if (min < 10 || min == 0){
-      min = '0' + min;
-    }
-
-    timer.innerHTML = min+':'+sec;
-
-    setTimeout("timerCycle()", 1000);
+  // Actualizar visualización del temporizador
+  function updateTimerDisplay() {
+    const minutes = gameState.minutes.toString().padStart(2, '0');
+    const seconds = gameState.seconds.toString().padStart(2, '0');
+    timer.textContent = `${minutes}:${seconds}`;
   }
-}
 
-function ganar() {
-  if (!jaHaGuanyat) {
-    if (matriu[0][0]==1 && matriu[0][1]==2 && matriu[0][2]==3 && matriu[1][0]==4 && matriu[1][1]==5 && 
-      matriu[1][2]==6 && matriu[2][0]==7 && matriu[2][1]==8 && matriu[2][2]==0) {
-      if (min>0){
-        alert("Has Ganado con el tiempo de " + actualMinutes + " minutos y " +actualSeconds+ " segundos");
-        stopTimer(); 
-      } else {
-        alert("Has Ganado con el tiempo de " + actualSeconds + " segundos");
-        stopTimer();
+  // Actualizar visualización de movimientos
+  function updateMovesDisplay() {
+    movesCount.textContent = gameState.moves;
+  }
+
+  // Verificar victoria
+  function checkWin() {
+    const winCondition = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 0]
+    ];
+
+    let isWin = true;
+
+    for (let i = 0; i < gameState.size; i++) {
+      for (let j = 0; j < gameState.size; j++) {
+        if (gameState.matrix[i][j] !== winCondition[i][j]) {
+          isWin = false;
+          break;
+        }
+      }
+      if (!isWin) break;
+    }
+
+    if (isWin) {
+      gameState.hasWon = true;
+      stopTimer();
+      showWinMessage();
+    }
+
+    return isWin;
+  }
+
+  // Mostrar mensaje de victoria
+  function showWinMessage() {
+    let timeMessage;
+
+    if (gameState.minutes > 0) {
+      timeMessage = `con un tiempo de ${gameState.minutes} minutos y ${gameState.seconds} segundos`;
+    } else {
+      timeMessage = `con un tiempo de ${gameState.seconds} segundos`;
+    }
+
+    winMessage.innerHTML = `¡Felicidades! Has completado el puzzle ${timeMessage} y con ${gameState.moves} movimientos.`;
+    winMessage.style.display = 'block';
+  }
+
+  // Reiniciar juego
+  function resetGame() {
+    stopTimer();
+
+    // Reiniciar estado del juego
+    gameState.matrix = [
+      [1, 2, 3],
+      [4, 0, 6],
+      [7, 5, 8]
+    ];
+    gameState.emptyCell = { row: 1, col: 1 };
+    gameState.isRunning = false;
+    gameState.hasWon = false;
+    gameState.seconds = 0;
+    gameState.minutes = 0;
+    gameState.moves = 0;
+
+    // Actualizar UI
+    updateTimerDisplay();
+    updateMovesDisplay();
+    renderBoard();
+    winMessage.style.display = 'none';
+  }
+
+  // Mezclar fichas
+  function shuffleTiles() {
+    if (gameState.isRunning) {
+      stopTimer();
+    }
+
+    // Determinar número de mezclas según la dificultad
+    let shuffleCount;
+    switch (gameState.difficulty) {
+      case 'easy':
+        shuffleCount = 20;
+        break;
+      case 'medium':
+        shuffleCount = 50;
+        break;
+      case 'hard':
+        shuffleCount = 100;
+        break;
+      default:
+        shuffleCount = 30;
+    }
+
+    // Implementación de mezcla
+    for (let i = 0; i < shuffleCount; i++) {
+      const directions = [
+        { row: -1, col: 0 },  // Arriba
+        { row: 1, col: 0 },   // Abajo
+        { row: 0, col: -1 },  // Izquierda
+        { row: 0, col: 1 }    // Derecha
+      ];
+
+      const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+      const newRow = gameState.emptyCell.row + randomDirection.row;
+      const newCol = gameState.emptyCell.col + randomDirection.col;
+
+      if (newRow >= 0 && newRow < gameState.size &&
+        newCol >= 0 && newCol < gameState.size) {
+        // Intercambiar valores
+        gameState.matrix[gameState.emptyCell.row][gameState.emptyCell.col] = gameState.matrix[newRow][newCol];
+        gameState.matrix[newRow][newCol] = 0;
+
+        // Actualizar celda vacía
+        gameState.emptyCell = { row: newRow, col: newCol };
       }
     }
+
+    // Reiniciar temporizador y movimientos
+    gameState.isRunning = false;
+    gameState.hasWon = false;
+    gameState.seconds = 0;
+    gameState.minutes = 0;
+    gameState.moves = 0;
+
+    // Actualizar UI
+    updateTimerDisplay();
+    updateMovesDisplay();
+    renderBoard();
+    winMessage.style.display = 'none';
   }
-}
+
+  // Establecer dificultad
+  function setDifficulty(level) {
+    gameState.difficulty = level;
+
+    // Actualizar botones de dificultad
+    easyBtn.classList.remove('active');
+    mediumBtn.classList.remove('active');
+    hardBtn.classList.remove('active');
+
+    if (level === 'easy') {
+      easyBtn.classList.add('active');
+    } else if (level === 'medium') {
+      mediumBtn.classList.add('active');
+    } else if (level === 'hard') {
+      hardBtn.classList.add('active');
+    }
+  }
+});

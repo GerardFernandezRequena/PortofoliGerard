@@ -1,35 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/carvajalNil_act_004.css">
-    <title>Puzzle Lliscan</title>
+    <title>Puzzle Matemático Deslizante</title>
+    <link rel="stylesheet" href="FernandezGerard_act_004.css">
 </head>
+
 <body>
-<div id="stopwatch">
-     00:00
-</div>
-<table id="taulell">
-	<tbody>
-		<tr>
-            <td><img id="c00"/></td>
-            <td><img id="c01"/></td>
-            <td><img id="c02"/></td>
-        </tr>
-        <tr>
-            <td><img id="c10"/></td>
-            <td><img id="c11"/></td>
-            <td><img id="c12"/></td>
-        </tr>
-        <tr>
-            <td><img id="c20"/></td>
-            <td><img id="c21"/></td>
-            <td><img id="c22"/></td>
-        </tr>
-	</tbody>
-</table>
+    <div class="container">
+        <h1>Puzzle Matemático Deslizante</h1>
+
+        <div class="timer" id="stopwatch">00:00</div>
+
+        <div class="moves">Movimientos: <span id="moves-count">0</span></div>
+
+        <div class="difficulty">
+            <button id="easy-btn" class="active">Fácil</button>
+            <button id="medium-btn">Medio</button>
+            <button id="hard-btn">Difícil</button>
+        </div>
+
+        <div class="puzzle-container">
+            <div class="puzzle-board" id="puzzle-board">
+                <!-- Las celdas se generarán con JavaScript -->
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="reset-btn">Reiniciar</button>
+            <button id="shuffle-btn">Mezclar</button>
+        </div>
+
+        <div class="message" id="win-message">
+            ¡Felicidades! Has completado el puzzle.
+        </div>
+    </div>
+
     <script src="FernandezGerard_act_004.js"></script>
 </body>
+
 </html>

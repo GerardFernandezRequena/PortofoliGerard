@@ -1,46 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html lang="ca">
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendari mes en curs</title>
     <link rel="stylesheet" type="text/css" href="calendari.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 
 <body>
+    <header>
+        <h1>Calendari mes en curs</h1>
+    </header>
 
-    <div class="greyNotes" id="promptNotes">
-        <div class="whiteNotes">
-            <div class="misatgesNotes">
-                <h1>Afegir un comentari</h2>
-                    <h3 id="idclick" class="diaclicat">a</h3>
-            </div>
-            <div class="inputs">
-                <input type="text" class="inputnota" id="notaAfegida"></button>
-            </div>
-            <div class="botons">
-                <button class="boto" onclick="tancarNotes()">Tancar</button>
-                <button class="boto" onclick="afegirNotes()">Guardar</button>
-                <button class="boto" onclick="eliminarNotes()">Eliminar</button>
+    <main>
+        <div class="calendar-controls">
+            <button id="prev" class="nav-button">
+                <img src="img/prev.png" width="40" alt="Mes anterior">
+            </button>
+            <button id="next" class="nav-button">
+                <img src="img/next.png" width="55" alt="Mes següent">
+            </button>
+        </div>
+
+        <div class="calendar-container">
+            <table id="calendari"></table>
+        </div>
+
+        <!-- Modal per a notes -->
+        <div class="modal" id="notesModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Afegir un comentari</h2>
+                    <h3 id="selectedDate" class="selected-date"></h3>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="note-input" id="noteInput" placeholder="Escriu la teva nota aquí...">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" onclick="closeNotes()">Tancar</button>
+                    <button class="btn btn-primary" onclick="saveNote()">Guardar</button>
+                    <button class="btn btn-danger" onclick="deleteNote()">Eliminar</button>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
-
-    <h1>Calendari mes en curs</h1>
-
-    <input type="hidden" id="id_month_offset" name="month_offset" value=0 />
-
-    <a href="#" id="prev">
-        <img src="img/prev.png" width="40px" class="prev"></a>
-    <a href="#" id="next">
-        <img src="img/next.png" width="55px" class="next"></a>
-
-    <table id="calendari">
-    </table>
+    <script src="calendari.js"></script>
 </body>
-<script src="calendari.js"></script>
-
 
 </html>

@@ -1,49 +1,76 @@
-let primerNombre;
-let segonNombre;
-let resultat;
-let compracion;
+function leerNumeros() {
+    const primerNumero = parseFloat(document.getElementById("primerNumero").value);
+    const segundoNumero = parseFloat(document.getElementById("segundoNumero").value);
 
-function llegueixNombres() {
-    primerNombre = parseInt(document.getElementById("primerNombre").value);
-    segonNombre = parseInt(document.getElementById("segonNombre").value);
-    if (isNaN(primerNombre) || isNaN(segonNombre)) {
-        alert("Tens que posar un numero!!!")
+    if (isNaN(primerNumero) || isNaN(segundoNumero)) {
+        mostrarError("Por favor, ingrese números válidos en ambos campos");
+        return null;
     }
+
+    return { primerNumero, segundoNumero };
 }
 
-function suma() {
-    llegueixNombres();
-    resultat = primerNombre + segonNombre;
-    compracion = Number.isNaN(resultat);
-    if (compracion == false) {
-        alert("El Resultat de la suma és " + resultat);
-    }
-};
+function mostrarResultado(valor, operacion) {
+    const operaciones = {
+        'suma': '+',
+        'resta': '-',
+        'multiplicacion': '×',
+        'division': '÷'
+    };
 
+    const simbolo = operaciones[operacion];
+    const primerNumero = document.getElementById("primerNumero").value;
+    const segundoNumero = document.getElementById("segundoNumero").value;
 
-function resta() {
-    llegueixNombres();
-    resultat = primerNombre - segonNombre;
-    compracion = Number.isNaN(resultat);
-    if (compracion == false) {
-        alert("El Resultat de la resta és " + resultat);
-    }
-};
+    document.getElementById("valorResultado").textContent =
+        `${primerNumero} ${simbolo} ${segundoNumero} = ${valor}`;
+}
 
-function producte() {
-    llegueixNombres();
-    resultat = primerNombre * segonNombre;
-    compracion = Number.isNaN(resultat);
-    if (compracion == false) {
-        alert("El Resultat de la multipliació és " + resultat);
-    }
-};
+function mostrarError(mensaje) {
+    document.getElementById("valorResultado").textContent = "Error: " + mensaje;
+    document.getElementById("valorResultado").style.color = "#e74c3c";
 
-function divisio() {
-    llegueixNombres();
-    resultat = primerNombre / segonNombre;
-    compracion = Number.isNaN(resultat);
-    if (compracion == false) {
-        alert("El Resultat de la divisió és " + resultat);
+    // Restablecer el color después de 3 segundos
+    setTimeout(() => {
+        document.getElementById("valorResultado").style.color = "#2c3e50";
+    }, 3000);
+}
+
+function operacion(tipo) {
+    const numeros = leerNumeros();
+    if (!numeros) return;
+
+    const { primerNumero, segundoNumero } = numeros;
+    let resultado;
+
+    try {
+        switch (tipo) {
+            case 'suma':
+                resultado = primerNumero + segundoNumero;
+                break;
+            case 'resta':
+                resultado = primerNumero - segundoNumero;
+                break;
+            case 'multiplicacion':
+                resultado = primerNumero * segundoNumero;
+                break;
+            case 'division':
+                if (segundoNumero === 0) {
+                    mostrarError("No se puede dividir por cero");
+                    return;
+                }
+                resultado = primerNumero / segundoNumero;
+                break;
+            default:
+                mostrarError("Operación no válida");
+                return;
+        }
+
+        // Redondear si es necesario
+        resultado = Math.round(resultado * 100) / 100;
+        mostrarResultado(resultado, tipo);
+    } catch (error) {
+        mostrarError("Ha ocurrido un error inesperado");
+        console.error(error);
     }
-};
+}

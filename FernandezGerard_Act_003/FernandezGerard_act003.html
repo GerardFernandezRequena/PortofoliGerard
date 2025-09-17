@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 
 <head>
     <meta charset="UTF-8">
@@ -11,16 +11,40 @@
 </head>
 
 <body>
-    <div id="cuadro">
-        <h1 id="titulo">Matrius i missatges</h1>
-        <input type="text" id="elementAAfegir"></input>
-        <input type="button" id="btAfegeix" value="Afegeix" onclick="afegeixElementAMatriu();"></input>
-        <input type="button" id="btMostra" value="Mostra" onclick="mostraElementsMatriu();"></input>
-        <input type="button" id="btNeteja" value="Neteja" onclick="netejaMatriu();"></input>
-        <p>Mostrar La Matriu: <span id="resultat"></span></p>
+    <div class="container">
+        <header>
+            <h1>Matrius i missatges</h1>
+            <p class="subtitle">Gestiona els elements de la teva matriu</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <input type="text" id="elementAAfegir" placeholder="Introdueix un element...">
+                <div class="button-group">
+                    <button id="btAfegeix" class="btn primary" onclick="afegeixElementAMatriu()">Afegeix</button>
+                    <button id="btMostra" class="btn secondary" onclick="mostraElementsMatriu()">Mostra</button>
+                    <button id="btNeteja" class="btn danger" onclick="netejaMatriu()">Neteja</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2>Contingut de la matriu:</h2>
+                <div id="resultat" class="result-box">
+                    <p class="placeholder">La matriu està buida</p>
+                </div>
+                <div class="matrix-info">
+                    <p>Nombre d'elements: <span id="elementCount">0</span></p>
+                    <p>Última modificació: <span id="lastModified">-</span></p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Activitat 3 - Programació amb JavaScript</p>
+        </footer>
     </div>
 
+    <script src="FernandezGerard_act003.js"></script>
 </body>
-<script src="FernandezGerard_act003.js"></script>
 
 </html>

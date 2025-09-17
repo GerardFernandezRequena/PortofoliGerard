@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -7,24 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./FernandezGerard_act_001.css">
     <link rel="shortcut icon" href="/img/faviconCalculator.png" type="image/png">
-    <title>Operacions Matematicas</title>
+    <title>Calculadora Matemática</title>
 </head>
 
 <body>
-    <h1 id="titulo">Calculadora</h1>
-    <form class="formulari">
-        <p>Nombre 1:</p><input type="text" class="input" id="primerNombre"><br>
-        <p>Nombre 2:</p><input type="text" class="input" id="segonNombre"><br>
-        <div>
-            <button onclick="suma()" class="boton">+</button>
-            <button onclick="resta()" class="boton">-</button>
-            <button onclick="producte()" class="boton">*</button>
-            <button onclick="divisio()" class="boton">/</button>
-        </div>
-    </form>
+    <div class="container">
+        <h1>Calculadora</h1>
+        <div class="formulario">
+            <div class="input-group">
+                <label for="primerNumero">Número 1:</label>
+                <input type="number" id="primerNumero" placeholder="Ingrese un número">
+            </div>
 
-    <script type="text/javascript " src="./FernandezGerard_act_001.js"></script>
-</body>
+            <div class="input-group">
+                <label for="segundoNumero">Número 2:</label>
+                <input type="number" id="segundoNumero" placeholder="Ingrese un número">
+            </div>
+
+            <div class="botones">
+                <button onclick="operacion('suma')" class="boton operador">+</button>
+                <button onclick="operacion('resta')" class="boton operador">-</button>
+                <button onclick="operacion('multiplicacion')" class="boton operador">×</button>
+                <button onclick="operacion('division')" class="boton operador">÷</button>
+            </div>
+
+            <div class="resultado" id="resultado">
+                <p>Resultado: <span id="valorResultado">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./FernandezGerard_act_001.js"></script>
 </body>
 
 </html>

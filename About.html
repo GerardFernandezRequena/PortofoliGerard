@@ -1,106 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 
 <head>
-    <title>Portafoli Gerard Fernández</title>
+    <title>Portafoli | Gerard Fernández - Desenvolupador Web</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./styleAboutme.css">
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <meta name="description"
+        content="Portafoli personal de Gerard Fernández, desenvolupador web amb coneixements en HTML, CSS, JavaScript, PHP i SQL">
+    <meta name="keywords" content="desenvolupador web, portafoli, Gerard Fernández, HTML, CSS, JavaScript, PHP, SQL">
+    <meta name="author" content="Gerard Fernández">
 
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="./assets/css/styleAboutme.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
+    <!-- Cabecera -->
+    <div id="header"></div>
 
-    <div id="jum" class="jumbotron text-center" style="margin-bottom:0">
-        <h3>Benvingut!!!&#128075;</h3>
-        <h3>Pren riscos i prepara't per fallar &#128170;🖥️</h3>
-    </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="./paginaPrincipal.html">
+                <i class="fas fa-code me-2"></i>Gerard Fernández
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li id="li1" class="nav-item active">
-                    <a class="nav-link" href="./paginaPrincipal.html">Home</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="./About.html">About Me</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="./Contact.html">Contact Me</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Activitats
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="./FernandezGerard_act_001/FernandezGerard_act_001.html">
-                            Activitat 1 - Operacions amb 2 nombres
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./paginaPrincipal.html">
+                            <i class="fas fa-home me-1"></i> Home
                         </a>
-                        <a class="dropdown-item" href="./FernandezGerard_Act_002/FernandezGerard_Act_002.html">
-                            Activitat 2 - Rellotge amb mostra i amaga un missatge de salutació
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./About.html">
+                            <i class="fas fa-user me-1"></i> About Me
                         </a>
-                        <a class="dropdown-item" href="./FernandezGerard_Act_003/FernandezGerard_act003.html">
-                            Activitat 3 - Operacions amb Matrius i missatges
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Contact.html">
+                            <i class="fas fa-envelope me-1"></i> Contact Me
                         </a>
-                        <a class="dropdown-item" href="./Act4-PuzzleLliscant/FernandezGerard_act_004.html">
-                            Activitat 4 -  Puzzle lliscant
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-folder me-1"></i> Activitats
                         </a>
-                        <a class="dropdown-item" href="./Act5-Calculadora/FernandezGerard_act_005.html">
-                            Activitat 5 - Calculadora científica
-                        </a>
-                        <a class="dropdown-item" href="./Act6-Calendari/calendari.html">
-                            Activitat 6 - Calendari
-                        </a>
-                    </div>
-                </li>
-            </ul>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="./FernandezGerard_act_001/FernandezGerard_act_001.html">
+                                    <i class="fas fa-calculator me-2"></i>Activitat 1 - Operacions amb 2 nombres
+                                </a></li>
+                            <li><a class="dropdown-item" href="./FernandezGerard_Act_002/FernandezGerard_Act_002.html">
+                                    <i class="fas fa-clock me-2"></i>Activitat 2 - Rellotge amb missatge de salutació
+                                </a></li>
+                            <li><a class="dropdown-item" href="./FernandezGerard_Act_003/FernandezGerard_act003.html">
+                                    <i class="fas fa-table me-2"></i>Activitat 3 - Operacions amb Matrius
+                                </a></li>
+                            <li><a class="dropdown-item" href="./Act4-PuzzleLliscant/FernandezGerard_act_004.html">
+                                    <i class="fas fa-puzzle-piece me-2"></i>Activitat 4 - Puzzle lliscant
+                                </a></li>
+                            <li><a class="dropdown-item" href="./Act5-Calculadora/FernandezGerard_act_005.html">
+                                    <i class="fas fa-calculator me-2"></i>Activitat 5 - Calculadora científica
+                                </a></li>
+                            <li><a class="dropdown-item" href="./Act6-Calendari/calendari.html">
+                                    <i class="fas fa-calendar-alt me-2"></i>Activitat 6 - Calendari
+                                </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <div id="containerSobreMi" class="container">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img id="imagenGero" src="./img/foto_Gerard.png" alt="foto_Gerard" class="img-fluid">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Gerard Fernández Requena</h5>
-                        <p class="card-text">
-                            - Em considero algú que aconsegueix el que es proposa, ja que crec que els èxits són resultats de les decisions que es prenen i les metes que cadascú es posa.
-                        </p>
-                        <p class="card-text">
-                            - M'agrada explorar les meves potències i talents com a individu i adquirir un major coneixement de mi mateix.
-                        </p>
-                        <p class="card-text">
-                            - Tinc experiència amb creació Pàgines web ( <img src="./img/html.png" alt="html.png" class="img-fluid">
-                            <img class="imagen" src="./img/css.png" alt="css.png" class="img-fluid">...) i Llenguatges de Programació (
-                            <img class="imagen" src="./img/php.png" alt="php.png" class="img-fluid">
-                            <img class="imagen" src="./img/js.png" alt="js.png" class="img-fluid">
-                            <img class="imagen" src="./img/servidor-sql.png" alt="servidor-sql.png" class="img-fluid">...).
-                        </p>
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card about-card">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <div class="image-container">
+                                    <img src="./assets/img/foto_Gerard.png" alt="Gerard Fernández - Desenvolupador Web"
+                                        class="profile-img">
+                                    <div class="image-overlay">
+                                        <div class="overlay-content">
+                                            <h4>Gerard Fernández</h4>
+                                            <p>Desenvolupador Web</p>
+                                            <div class="social-links">
+                                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h2 class="card-title">Sobre mi</h2>
+                                    <div class="divider"></div>
+                                    <div class="card-text">
+                                        <p class="about-text">
+                                            <i class="fas fa-rocket me-2"></i>
+                                            Em considero algú que aconsegueix el que es proposa, ja que crec que els
+                                            èxits són resultats de les decisions que es prenen i les metes que cadascú
+                                            es posa.
+                                        </p>
+                                        <p class="about-text">
+                                            <i class="fas fa-search me-2"></i>
+                                            M'agrada explorar les meves potències i talents com a individu i adquirir un
+                                            major coneixement de mi mateix.
+                                        </p>
+                                        <p class="about-text">
+                                            <i class="fas fa-laptop-code me-2"></i>
+                                            Tinc experiència amb creació de pàgines web i aplicacions amb les següents
+                                            tecnologies:
+                                        </p>
+
+                                        <div class="skills-section">
+                                            <h5 class="skills-title">Tecnologies que domino:</h5>
+                                            <div class="skills-container">
+                                                <div class="skill-item">
+                                                    <img src="./assets/img/hmtl.png" alt="HTML5" class="skill-img">
+                                                    <span>HTML5</span>
+                                                </div>
+                                                <div class="skill-item">
+                                                    <img src="./assets/img/css.png" alt="CSS3" class="skill-img">
+                                                    <span>CSS3</span>
+                                                </div>
+                                                <div class="skill-item">
+                                                    <img src="./assets/img/js.png" alt="JavaScript" class="skill-img">
+                                                    <span>JavaScript</span>
+                                                </div>
+                                                <div class="skill-item">
+                                                    <img src="./assets/img/php.png" alt="PHP" class="skill-img">
+                                                    <span>PHP</span>
+                                                </div>
+                                                <div class="skill-item">
+                                                    <img src="./assets/img/servidor-sql.png" alt="SQL" class="skill-img">
+                                                    <span>SQL</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <div class="jumbotron text-center" id="footer">
-        <a class="enllaçoslegals" href="cookies.html">Política de Cookies</a> |
-        <a class="enllaçoslegals" href="cookies.html">Avís legal i termes dús</a> |
-        <a class="enllaçoslegals" href="cookies.html">Privadesa</a>
-    </div>
+    <!-- Pie de página -->
+    <div id="footer"></div>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/About.js"></script>
 </body>
 
 </html>

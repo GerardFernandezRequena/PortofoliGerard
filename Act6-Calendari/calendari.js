@@ -1,242 +1,200 @@
-createTable();
+// Variables globals
+let currentMonthOffset = 0;
+let currentDate = new Date();
 
-function update_cal(n) {
-    var offset = $("#id_month_offset");
-    offset.val(parseInt(offset.val()) + n);
-    $('#calendar').calendarWidget({});
+// Inicialització del calendari
+document.addEventListener('DOMContentLoaded', function () {
+    initializeCalendar();
+    setupEventListeners();
+});
+
+// Configuració dels event listeners
+function setupEventListeners() {
+    $('#next').click(function () {
+        navigateMonth(1);
+    });
+
+    $('#prev').click(function () {
+        navigateMonth(-1);
+    });
 }
 
-function createTable(pos = 0, anyo = 0) {
+// Inicialitza el calendari
+function initializeCalendar() {
+    renderCalendar();
+}
 
+// Navegació entre mesos
+function navigateMonth(direction) {
+    currentMonthOffset += direction;
+    renderCalendar();
+}
 
-    //-------------------- Arrays amb els Mesos i Anys --------------------
+// Renderitza el calendari
+function renderCalendar() {
+    const calendarEl = document.getElementById('calendari');
+    calendarEl.innerHTML = '';
 
-    let calendari = document.getElementById("calendari");
-    let nom_mesos = Array("Gener", "Febrer", "Març", "Abril", "Maig",
-        "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre",
-        "Desembre");
-    let data_actual = new Date();
-    let caption = calendari.createCaption();
-    caption.setAttribute("class", "calendari2");
-    let Mes = nom_mesos[data_actual.getMonth() + pos + parseInt($("#id_month_offset").val())] + " " + (data_actual.getFullYear() + anyo);
-    caption.innerHTML = Mes.toUpperCase();
+    // Calcula el mes i any a mostrar
+    const displayDate = new Date();
+    displayDate.setMonth(currentDate.getMonth() + currentMonthOffset);
 
+    const month = displayDate.getMonth();
+    const year = displayDate.getFullYear();
 
-    //--------------------Array amb Nom dels dies--------------------
-    let nomDiesSetmana = Array("dilluns", "dimarts", "dimecres",
-        "dijous", "divendres", "dissabte", "diumenge");
+    // Crea el caption amb el mes i any
+    const monthNames = [
+        "Gener", "Febrer", "Març", "Abril", "Maig", "Juny",
+        "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"
+    ];
 
-    let thead = calendari.createTHead();
-    thead.setAttribute("class", "calendari2");
-    for (let files = 0; files < 1; files++) {
+    const caption = calendarEl.createCaption();
+    caption.textContent = `${monthNames[month].toUpperCase()} ${year}`;
 
-        let fila = document.createElement("tr");
+    // Crea el capçaler amb els dies de la setmana
+    const dayNames = [
+        "dilluns", "dimarts", "dimecres", "dijous",
+        "divendres", "dissabte", "diumenge"
+    ];
 
-        for (let columnes = 0; columnes < 7; columnes++) {
+    const thead = calendarEl.createTHead();
+    const headerRow = thead.insertRow();
 
-            let casella = document.createElement("td");
-            casella
-            let casellaText = document.createTextNode(nomDiesSetmana[columnes]);
-            casella.appendChild(casellaText);
-            fila.appendChild(casella);
+    dayNames.forEach(day => {
+        const th = document.createElement('th');
+        th.textContent = day;
+        headerRow.appendChild(th);
+    });
 
-        }
-        thead.appendChild(fila);
-    }
+    // Crea el cos del calendari
+    const tbody = calendarEl.createTBody();
 
-    let tbody = calendari.createTBody();
-    tbody.setAttribute("class", "calendari2");
+    // Calcula el primer dia del mes i l'últim dia del mes
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
 
-    let month = data_actual.getMonth() + pos + 1;
-    let year = data_actual.getFullYear();
-    let daysInMonth = new Date(year, month, 0).getDate();
-    let comptDies = 0;
+    // Determina el dia de la setmana del primer dia (0 = dilluns, 6 = diumenge)
+    let firstDayOfWeek = firstDay.getDay();
+    if (firstDayOfWeek === 0) firstDayOfWeek = 7; // Convertir diumenge (0) a 7
+    firstDayOfWeek--; // Ajustar perquè dilluns sigui 0
 
-
-
-    let d = new Date();
-    let diaDelMes = d.getDate();
-    let dia = new Date(d.getFullYear(), d.getMonth() + pos, 1);
-
-    if (month == 5) {
-        var primerDiaMes = 7;
-    } else {
-        var primerDiaMes = dia.getDay() + anyo;
-        if (primerDiaMes == 0) {
-            primerDiaMes = 7;
-        }
-    }
-    let començaMes = false;
-
-    comptBlanc = 0;
-
-    //--------------------Array amb els dies--------------------
+    // Crea les files del calendari
+    let dayCount = 1;
 
     for (let i = 0; i < 6; i++) {
-
-
-        let fila = document.createElement("tr");
+        const row = tbody.insertRow();
 
         for (let j = 0; j < 7; j++) {
+            const cell = row.insertCell();
 
-            if (comptDies < primerDiaMes - 1 && començaMes == false) {
+            if ((i === 0 && j < firstDayOfWeek) || dayCount > daysInMonth) {
+                // Cel·les buides abans del primer dia o després de l'últim dia
+                cell.className = 'empty-day';
+                cell.innerHTML = '&nbsp;';
+            } else {
+                // Cel·les amb dies del mes
+                const dayId = `${dayCount}-${month}-${year}`;
+                cell.id = dayId;
+                cell.className = getDayCellClass(j);
 
-                comptDies++;
-                comptBlanc++;
-                let casella = document.createElement("td");
-                let br = document.createElement("br");
-                casella.classList.add("white");
-                let casellaText = document.createTextNode("-");
-                casella.appendChild(casellaText);
-                casella.appendChild(br);
-                fila.appendChild(casella);
-
-            } else if (comptDies + primerDiaMes && comptDies >= primerDiaMes - 1 || començaMes == true) {
-
-                if (començaMes == false) {
-                    començaMes = true;
-                    comptDies = 0;
+                // Comprova si és el dia actual
+                const today = new Date();
+                if (dayCount === today.getDate() &&
+                    month === today.getMonth() &&
+                    year === today.getFullYear() &&
+                    currentMonthOffset === 0) {
+                    cell.classList.add('today');
                 }
-                if (comptDies < daysInMonth) {
-                    comptDies++;
-                    let casella = document.createElement("td");
-                    let br = document.createElement("br");
-                    let casellaText = document.createTextNode(comptDies);
-                    casella.appendChild(casellaText);
-                    casella.appendChild(br);
 
-                    //S'afegeix una ID que serà el número del dia de la casella + el mes i l'any
-                    casella.setAttribute("id", comptDies + " " + Mes);
-                    //S'afegeix un onclick que crida una funció que enviarà la ID de la casella premuda, aquesta funció crearà les notes
-                    casella.setAttribute("onclick", "crearText(this.id)");
-                    //Es comprova si alguna ID (clau) del localStorage existeix a dins d'aquesta, si hi ha una clau, s'escriu el missatge guardat.
-                    if (localStorage.getItem(comptDies + " " + Mes) != null) {
-                        casella.innerHTML += localStorage.getItem(comptDies + " " + Mes);
-                        casella.classList.add("noteStyle");
-                    }
+                // Número del dia
+                const dayNumber = document.createElement('div');
+                dayNumber.textContent = dayCount;
+                cell.appendChild(dayNumber);
 
-
-
-
-                    if (j == 5 || j == 6) {
-                        casella.classList.add("vermell");
-                    } else {
-                        casella.classList.add("blau");
-                    }
-                    if (comptDies == diaDelMes && pos == 0 && anyo == 0) {
-                        casella.classList.add("verd");
-                    }
-                    fila.appendChild(casella);
+                // Comprova si hi ha notes per a aquest dia
+                const note = localStorage.getItem(dayId);
+                if (note) {
+                    cell.classList.add('has-note');
+                    const noteIndicator = document.createElement('div');
+                    noteIndicator.className = 'note-indicator';
+                    noteIndicator.textContent = note;
+                    cell.appendChild(noteIndicator);
                 }
+
+                // Afegeix l'esdeveniment de clic
+                cell.addEventListener('click', function () {
+                    openNotesModal(dayId, dayCount, month, year);
+                });
+
+                dayCount++;
             }
         }
-        tbody.appendChild(fila);
+
+        // Si hem arribat a l'últim dia, sortim del bucle
+        if (dayCount > daysInMonth) break;
     }
-
-    calendari.appendChild(tbody);
-    calendari.setAttribute("border", "2");
 }
 
-
-//Funció que demana un text que s'escriurà sota la casella premuda (Com una nota);
-function crearText(clicked_id) {
-    let promptNotes = document.getElementById("promptNotes");
-    let diaClicat = document.getElementById("idclick");
-
-    //Ensenyo la finestra
-    promptNotes.style.display = "flex";
-
-    //Afegeix La data del dia en què s'afegirà el comentari
-    diaClicat.innerHTML = clicked_id;
-
-    //Afegeixo la nota (En cas que en tingui) a dins de l'input
-    document.getElementById("notaAfegida").value = localStorage.getItem(clicked_id);
+// Retorna la classe CSS per a la cel·la del dia en funció del dia de la setmana
+function getDayCellClass(dayOfWeek) {
+    return (dayOfWeek === 5 || dayOfWeek === 6) ?
+        'calendar-day weekend' : 'calendar-day weekday';
 }
 
+// Obre el modal per a afegir/editar notes
+function openNotesModal(dayId, day, month, year) {
+    const monthNames = [
+        "Gener", "Febrer", "Març", "Abril", "Maig", "Juny",
+        "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"
+    ];
 
-function tancarNotes() {
-    //Amago la finestra
-    document.getElementById("promptNotes").style.display = "none";
+    // Actualitza la data seleccionada al modal
+    document.getElementById('selectedDate').textContent =
+        `${day} de ${monthNames[month]} de ${year}`;
+
+    // Carrega la nota existent si n'hi ha
+    const existingNote = localStorage.getItem(dayId);
+    document.getElementById('noteInput').value = existingNote || '';
+
+    // Mostra el modal
+    document.getElementById('notesModal').style.display = 'flex';
+
+    // Guarda l'ID del dia seleccionat com a atribut del modal
+    document.getElementById('notesModal').setAttribute('data-day-id', dayId);
 }
 
-function afegirNotes() {
-    //Si l'input està buit, no afegirà res
-    if (document.getElementById("notaAfegida").value != "") {
+// Tanca el modal de notes
+function closeNotes() {
+    document.getElementById('notesModal').style.display = 'none';
+}
 
-        //Agafo la ID, ja que aquest cop no el rebò per onclick()
-        let clicked_id = document.getElementById("idclick").innerHTML;
+// Guarda la nota al localStorage
+function saveNote() {
+    const noteInput = document.getElementById('noteInput');
+    const noteText = noteInput.value.trim();
+    const dayId = document.getElementById('notesModal').getAttribute('data-day-id');
 
-        //Agafo el número del dia + el comentari que he escrit i el reemplaço amb el innerhtml que té actualment: 1 -> 1 <br> "Nota"
-        let dia = document.getElementById(clicked_id).innerHTML.replace(/(^\d+)(.+$)/i, '$1');
-        let text = document.getElementById("notaAfegida").value;
-        document.getElementById(clicked_id).innerHTML = dia + "<br>" + text;
-
-        //Afegeixo la classe per marcar els dies que tenen notes (Afegeix un border blanc molt maco)
-        document.getElementById(clicked_id).classList.add("noteStyle");
-
-        //Es guarda al localStorage, la clau és la ID del dia premut ("1 gener 2022") i el contingut és la nota.
-        localStorage.setItem(clicked_id, text);
-
-        //Amago la finestra
-        promptNotes.style.display = "none";
+    if (noteText) {
+        localStorage.setItem(dayId, noteText);
+        closeNotes();
+        renderCalendar(); // Actualitza el calendari per mostrar la nova nota
     } else {
-        promptNotes.style.display = "none";
+        alert('Si us plau, escriu una nota abans de guardar.');
     }
 }
 
-function eliminarNotes() {
-    //Elimino tot el td i afegeixo el dia
-    let clicked_id = document.getElementById("idclick").innerHTML;
-    let dia = document.getElementById(clicked_id).innerHTML.replace(/(^\d+)(.+$)/i, '$1');
+// Elimina la nota del localStorage
+function deleteNote() {
+    const dayId = document.getElementById('notesModal').getAttribute('data-day-id');
 
-    //Elimino la classe dels dies que tenen notes
-    document.getElementById(clicked_id).classList.remove("noteStyle");
-    document.getElementById(clicked_id).innerHTML = dia;
-
-    //Elimino la nota del localStorage
-    localStorage.removeItem(clicked_id);
-
-    //Amago la finestra
-    promptNotes.style.display = "none";
+    if (localStorage.getItem(dayId)) {
+        if (confirm('Estàs segur que vols eliminar aquesta nota?')) {
+            localStorage.removeItem(dayId);
+            closeNotes();
+            renderCalendar(); // Actualitza el calendari
+        }
+    } else {
+        alert('No hi ha cap nota per eliminar.');
+    }
 }
-
-$(document).ready(function() {
-
-    let pos = 0;
-    let anyo = 0;
-
-    $("#next").click(function() {
-
-        if (pos == 11) {
-            pos = -1;
-            anyo++;
-        }
-        $(".calendari2").remove();
-        pos++;
-        if (pos == 11) {
-            createTable(-1, anyo + 1);
-        } else {
-            createTable(pos, anyo);
-        }
-    });
-
-
-
-
-    $("#prev").click(function() {
-        if (pos == 0) {
-            pos = 12;
-            anyo--;
-        }
-        $(".calendari2").remove();
-
-        pos--;
-        if (pos == 11) {
-            createTable(-1, anyo + 1);
-
-        } else {
-            createTable(pos, anyo);
-
-        }
-    });
-});
