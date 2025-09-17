@@ -2,48 +2,34 @@
 <html lang="ca">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contacte | Portafoli Gerard Fernández</title>
-  <meta name="description" content="Formulari de contacte per a Gerard Fernández, desenvolupador web" />
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="./assets/css/styleContact.css" />
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styleContact.css">
 </head>
 
 <body>
   <!-- Hero Section -->
-  <header id="jum" class="jumbotron jumbotron-fluid text-center mb-0">
+  <header class="hero">
     <div class="container">
-      <h1 class="display-4">Contacta'm! <span aria-hidden="true">👋</span></h1>
-      <p class="lead">
-        Estic encantat de sentir-te. Parlem! <span aria-hidden="true">💪</span>
-      </p>
+      <h1>Contacta'm! <span>👋</span></h1>
+      <p class="lead">Estic encantat de sentir-te. Parlem! <span>💪</span></p>
     </div>
   </header>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="./paginaPrincipal.html">
-        <i class="fas fa-code mr-2"></i>Portafoli
+        <i class="fas fa-code me-2"></i>Portafoli
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <a class="nav-link" href="./paginaPrincipal.html">Inici</a>
           </li>
@@ -51,33 +37,31 @@
             <a class="nav-link" href="./About.html">Sobre mi</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="./Contact.html">Contacte <span class="sr-only">(actual)</span></a>
+            <a class="nav-link" href="./Contact.html">Contacte</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
               Activitats
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu">
               <a class="dropdown-item" href="./FernandezGerard_act_001/FernandezGerard_act_001.html">
-                <i class="fas fa-calculator mr-2"></i>Operacions amb 2 nombres
+                <i class="fas fa-calculator me-2"></i>Operacions amb 2 nombres
               </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="./FernandezGerard_Act_002/FernandezGerard_Act_002.html">
-                <i class="far fa-clock mr-2"></i>Rellotge digital
+                <i class="far fa-clock me-2"></i>Rellotge digital
               </a>
               <a class="dropdown-item" href="./FernandezGerard_Act_003/FernandezGerard_act003.html">
-                <i class="fas fa-table mr-2"></i>Operacions amb Matrius
+                <i class="fas fa-table me-2"></i>Operacions amb Matrius
               </a>
               <a class="dropdown-item" href="./Act4-PuzzleLliscant/FernandezGerard_act_004.html">
-                <i class="fas fa-puzzle-piece mr-2"></i>Puzzle lliscant
+                <i class="fas fa-puzzle-piece me-2"></i>Puzzle lliscant
               </a>
               <a class="dropdown-item" href="./Act5-Calculadora/FernandezGerard_act_005.html">
-                <i class="fas fa-square-root-alt mr-2"></i>Calculadora
-                científica
+                <i class="fas fa-square-root-alt me-2"></i>Calculadora científica
               </a>
               <a class="dropdown-item" href="./Act6-Calendari/calendari.html">
-                <i class="far fa-calendar-alt mr-2"></i>Calendari
+                <i class="far fa-calendar-alt me-2"></i>Calendari
               </a>
             </div>
           </li>
@@ -87,59 +71,52 @@
   </nav>
 
   <!-- Main Content -->
-  <main class="container my-5" id="containerSobreMi">
+  <main class="container my-5">
     <div class="row">
       <div class="col-lg-8 mb-5">
-        <div class="card shadow-lg border-0">
-          <div class="card-header bg-primary text-white text-center py-4">
+        <div class="card shadow-lg">
+          <div class="card-header">
             <h2 class="mb-0">Envia'm un missatge</h2>
             <p class="mb-0">Responré el més aviat possible</p>
           </div>
-          <div class="card-body p-4">
+          <div class="card-body">
             <form id="contactForm">
-              <div class="form-group">
-                <label for="name">Nom complet</label>
+              <div class="mb-3">
+                <label for="name" class="form-label">Nom complet</label>
                 <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="fas fa-user"></i></span>
-                  </div>
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
                   <input type="text" class="form-control" id="name" placeholder="El teu nom" required>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="email">Correu electrònic</label>
+              <div class="mb-3">
+                <label for="email" class="form-label">Correu electrònic</label>
                 <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="fas fa-envelope"></i></span>
-                  </div>
+                  <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                   <input type="email" class="form-control" id="email" placeholder="El teu correu electrònic" required>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="subject">Assumpte</label>
+              <div class="mb-3">
+                <label for="subject" class="form-label">Assumpte</label>
                 <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="fas fa-tag"></i></span>
-                  </div>
+                  <span class="input-group-text"><i class="fas fa-tag"></i></span>
                   <input type="text" class="form-control" id="subject" placeholder="Assumpte del missatge" required>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="message">Missatge</label>
+              <div class="mb-3">
+                <label for="message" class="form-label">Missatge</label>
                 <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="fas fa-comment"></i></span>
-                  </div>
+                  <span class="input-group-text"><i class="fas fa-comment"></i></span>
                   <textarea class="form-control" id="message" rows="5" placeholder="El teu missatge..."
                     required></textarea>
                 </div>
+                <div class="form-text text-end">0/500</div>
               </div>
 
-              <button type="submit" class="btn btn-primary btn-block py-3">
-                <i class="fas fa-paper-plane mr-2"></i>Enviar missatge
+              <button type="submit" class="btn btn-primary w-100 py-3">
+                <i class="fas fa-paper-plane me-2"></i>Enviar missatge
               </button>
             </form>
           </div>
@@ -147,76 +124,72 @@
       </div>
 
       <div class="col-lg-4">
-        <div class="card shadow-lg border-0 mb-4">
-          <div class="card-header bg-primary text-white text-center py-4">
+        <div class="card shadow-lg mb-4">
+          <div class="card-header">
             <h3 class="mb-0">Informació de contacte</h3>
           </div>
-          <div class="card-body p-4">
+          <div class="card-body">
             <div class="contact-info">
-              <div class="media mb-4">
-                <div class="media-icon bg-primary text-white rounded-circle mr-3">
+              <div class="contact-item">
+                <div class="contact-icon">
                   <i class="fas fa-map-marker-alt"></i>
                 </div>
-                <div class="media-body">
-                  <h5 class="mt-0">Direcció</h5>
-                  <p>Diagonal Josep Pujades 11, 08440 Cardedeu (Espanya)</p>
+                <div class="contact-details">
+                  <h5>Direcció</h5>
+                  <p>Diagonal Josep Pujades 11, 08440<br>Cardedeu (Espanya)</p>
                 </div>
               </div>
 
-              <div class="media mb-4">
-                <div class="media-icon bg-primary text-white rounded-circle mr-3">
+              <div class="contact-item">
+                <div class="contact-icon">
                   <i class="fas fa-envelope"></i>
                 </div>
-                <div class="media-body">
-                  <h5 class="mt-0">Correu electrònic</h5>
-                  <p>
-                    <a href="mailto:gerardfernandezrequena2002@gmail.com">gerardfernandezrequena2002@gmail.com</a>
-                  </p>
+                <div class="contact-details">
+                  <h5>Correu electrònic</h5>
+                  <p><a href="mailto:gerardfernandezrequena2002@gmail.com">gerardfernandezrequena2002@gmail.com</a></p>
                 </div>
               </div>
 
-              <div class="media mb-4">
-                <div class="media-icon bg-primary text-white rounded-circle mr-3">
+              <div class="contact-item">
+                <div class="contact-icon">
                   <i class="fas fa-phone"></i>
                 </div>
-                <div class="media-body">
-                  <h5 class="mt-0">Telèfon</h5>
-                  <p>
-                    <a href="tel:+34722743365">722 743 365</a>
-                  </p>
+                <div class="contact-details">
+                  <h5>Telèfon</h5>
+                  <p><a href="tel:+34722743365">722 743 365</a></p>
                 </div>
               </div>
             </div>
 
-            <hr class="my-4" />
+            <hr>
 
             <div class="text-center">
               <h4 class="mb-3">També em pots trobar a:</h4>
               <div class="social-links">
                 <a href="https://www.linkedin.com/in/gerard-fernández-requena/"
-                  class="btn btn-outline-primary mr-2 mb-2 social-btn">
-                  <i class="fab fa-linkedin fa-lg mr-1"></i> LinkedIn
+                  class="btn btn-outline-primary me-2 mb-2">
+                  <i class="fab fa-linkedin me-1"></i> LinkedIn
                 </a>
-                <a href="https://github.com/gerardfr5" class="btn btn-outline-primary mr-2 mb-2 social-btn">
-                  <i class="fab fa-github fa-lg mr-1"></i> GitHub
+                <a href="https://github.com/gerardfr5" class="btn btn-outline-primary me-2 mb-2">
+                  <i class="fab fa-github me-1"></i> GitHub
                 </a>
-                <a href="https://twitter.com/gerardfr5" class="btn btn-outline-primary mb-2 social-btn">
-                  <i class="fab fa-twitter fa-lg mr-1"></i> Twitter
+                <a href="https://twitter.com/gerardfr5" class="btn btn-outline-primary mb-2">
+                  <i class="fab fa-twitter me-1"></i> Twitter
                 </a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card shadow-lg border-0">
-          <div class="card-header bg-primary text-white text-center py-4">
+        <div class="card shadow-lg">
+          <div class="card-header">
             <h3 class="mb-0">On estic?</h3>
           </div>
           <div class="card-body p-0">
-            <div class="embed-responsive embed-responsive-1by1">
+            <div class="map-container">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2981.72357336772!2d2.356258776462989!3d41.63922477125919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4c9e6c9f56e5f%3A0x3b3f3b3f3b3f3b3f!2sDiagonal%20Josep%20Pujades%2C%2011%2C%2008440%20Cardedeu%2C%20Barcelona!5e0!3m2!1ses!2ses!4v1633456789012!5m2!1ses!2ses"
-                class="embed-responsive-item" style="border:0;" allowfullscreen="" loading="lazy">
+                allowfullscreen="" loading="lazy">
               </iframe>
             </div>
           </div>
@@ -226,47 +199,39 @@
   </main>
 
   <!-- Footer -->
-  <footer class="jumbotron jumbotron-fluid text-center mb-0 py-4 bg-dark text-white" id="footer">
+  <footer>
     <div class="container">
       <div class="row">
-        <div class="col-md-4 mb-3 mb-md-0">
+        <div class="col-md-4 mb-4 mb-md-0">
           <h5>Portafoli Gerard Fernández</h5>
           <p>Desenvolupador web amb passió per crear solucions digitals innovadores.</p>
         </div>
-        <div class="col-md-4 mb-3 mb-md-0">
+        <div class="col-md-4 mb-4 mb-md-0">
           <h5>Enllaços ràpids</h5>
           <div class="footer-links">
-            <a class="enllaçoslegals mx-2" href="cookies.html">Cookies</a>
-            <span class="text-white">|</span>
-            <a class="enllaçoslegals mx-2" href="avisoLegal.html">Avís legal</a>
-            <span class="text-white">|</span>
-            <a class="enllaçoslegals mx-2" href="privacidad.html">Privadesa</a>
+            <a href="cookies.html">Cookies</a>
+            <span>|</span>
+            <a href="avisoLegal.html">Avís legal</a>
+            <span>|</span>
+            <a href="privacidad.html">Privadesa</a>
           </div>
         </div>
         <div class="col-md-4">
           <h5>Connecta</h5>
           <div class="social-links">
-            <a href="https://www.linkedin.com/in/gerard-fernández-requena/" class="text-white mr-2"><i
-                class="fab fa-linkedin fa-lg"></i></a>
-            <a href="https://github.com/gerardfr5" class="text-white mr-2"><i class="fab fa-github fa-lg"></i></a>
-            <a href="https://twitter.com/gerardfr5" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="https://www.linkedin.com/in/gerard-fernández-requena/"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/gerardfr5"><i class="fab fa-github"></i></a>
+            <a href="https://twitter.com/gerardfr5"><i class="fab fa-twitter"></i></a>
           </div>
         </div>
       </div>
-      <hr class="my-4 bg-light">
-      <p class="mb-0">
-        &copy; 2023 Portafoli Gerard Fernández. Tots els drets reservats.
-      </p>
+      <hr>
+      <p class="mb-0">&copy; 2023 Portafoli Gerard Fernández. Tots els drets reservats.</p>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
-
-  <!-- Custom Script for Form Validation -->
-  <script src="./assets/js/Contact.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/js/contactForm.js"></script>
 </body>
 
 </html>

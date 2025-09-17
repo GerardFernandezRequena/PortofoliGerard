@@ -1,46 +1,95 @@
-window.onload = actualitzaHora;
-myFunction();
+// Variables globales
+let intervalId = null;
+let mensajeVisible = false; // Cambiado a false para que empiece oculto
 
+// Iniciar cuando la página cargue
+window.onload = function () {
+    actualitzaHora();
+    iniciarRellotge();
+    myFunction();
+
+    // Ocultar el mensaje al inicio
+    document.getElementById("missatge").classList.add("hidden");
+};
+
+// Función para iniciar el reloj en tiempo real
+function iniciarRellotge() {
+    // Limpiar intervalo previo si existe
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+
+    // Actualizar cada segundo
+    intervalId = setInterval(actualitzaHora, 1000);
+}
+
+// Función para formatear números con dos dígitos
+function formatDosDigits(num) {
+    return num < 10 ? "0" + num : num;
+}
+
+// Función principal para actualizar la hora
 function actualitzaHora() {
-    let data = new Date();
-    let hora = data.getHours();
-    let minuto = data.getMinutes();
-    let segundo = data.getSeconds();
-    if (hora < 10) {
-        hora = "0" + hora;
-    }
-    if (minuto < 10) {
-        minuto = "0" + minuto;
-    }
-    if (segundo < 10) {
-        segundo = "0" + segundo;
-    }
-    horaImprimible = hora + " : " + minuto + " : " + segundo
+    const data = new Date();
+    const hora = formatDosDigits(data.getHours());
+    const minuto = formatDosDigits(data.getMinutes());
+    const segundo = formatDosDigits(data.getSeconds());
 
-    document.getElementById("rellotge").innerHTML = horaImprimible
+    // Formato: HH : MM : SS (todos del mismo tamaño)
+    const horaImprimible = `
+        <span class="time-value">${hora}</span>
+        <span class="separator">:</span>
+        <span class="time-value">${minuto}</span>
+        <span class="separator">:</span>
+        <span class="time-value">${segundo}</span>
+    `;
 
-    setTimeout(reloj(), 1000)
+    document.getElementById("rellotge").innerHTML = horaImprimible;
+
+    // Si el mensaje está visible, actualizar el saludo
+    if (mensajeVisible) {
+        actualitzaSalutacio(data);
+    }
 }
 
-let x = new Boolean(false);
+// Función para actualizar el mensaje de saludo
+function actualitzaSalutacio(data) {
+    const hora = data.getHours();
+    let missatge = "";
+
+    if (hora >= 7 && hora < 14) {
+        missatge = "Bon Dia! ☀️";
+    } else if (hora >= 14 && hora < 18) {
+        missatge = "Bona Tarda! 🌤️";
+    } else if (hora >= 18 && hora < 21) {
+        missatge = "Bon Vespre! 🌙";
+    } else {
+        missatge = "Bona Nit! 🌙";
+    }
+
+    document.getElementById("missatge").textContent = missatge;
+}
+
+// Función para alternar la visibilidad del mensaje
 function amagaMostraInfo() {
-    x = Boolean(true);
-    let data = new Date();
-    let hora = data.getHours();
-    if (x == true) {
-        if (hora >= 7 && hora < 14) {
-            document.getElementById("missatge").innerHTML = "Bon Dia!";
-        } else if (hora >= 14 && hora <= 18) {
-            document.getElementById("missatge").innerHTML = "Bona Tarda!";
-        } else if (hora >= 18 && hora <= 20) {
-            document.getElementById("missatge").innerHTML = "Bon Vespre!";
-        } else {
-            document.getElementById("missatge").innerHTML = "Bona Nit!";
-        }
+    const missatgeElement = document.getElementById("missatge");
+    const boton = document.querySelector(".amaga-mostra");
+
+    mensajeVisible = !mensajeVisible;
+
+    if (mensajeVisible) {
+        missatgeElement.classList.remove("hidden");
+        const data = new Date();
+        actualitzaSalutacio(data);
+        boton.textContent = "Amaga Salutació";
+    } else {
+        missatgeElement.classList.add("hidden");
+        boton.textContent = "Mostra Salutació";
     }
 }
 
+// Función para aplicar estilos al mensaje
 function myFunction() {
-    let element = document.getElementById("missatge");
+    const element = document.getElementById("missatge");
     element.classList.add("mystyle");
 }

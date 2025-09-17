@@ -1,114 +1,268 @@
-let cientificaDisplay = document.getElementById('cientifica');
-let nomBotoCientific = document.getElementById('cambiar');
+// Variables globales
+let currentInput = '';
+let previousInput = '';
+let operation = null;
+let shouldResetScreen = false;
+let isScientificMode = false;
 
-/*Mostra el Modó científic i viceversa i fa funcionar l'animació*/
+const display = document.getElementById('display');
+const modeToggle = document.getElementById('mode-toggle');
+const basicCalc = document.getElementById('basic-calc');
+const scientificCalc = document.getElementById('scientific-calc');
 
-let esCientifica = false;
-let nombreActual = 0;
-let resultat = 0;
+// Función para alternar entre modos
+function toggleMode() {
+    isScientificMode = !isScientificMode;
 
-function appearCientifica() {
-    if (!esCientifica) {
-        nomBotoCientific.innerHTML = 'Basic';
-        cientificaDisplay.className = 'cientific';
-        esCientifica = true;
+    if (isScientificMode) {
+        modeToggle.textContent = 'Básica';
+        basicCalc.classList.add('scientific-active');
+        scientificCalc.classList.add('active');
     } else {
-        nomBotoCientific.innerHTML = 'Cientifica';
-        cientificaDisplay.className = 'basic';
-        esCientifica = false;
+        modeToggle.textContent = 'Científica';
+        basicCalc.classList.remove('scientific-active');
+        scientificCalc.classList.remove('active');
     }
 }
 
-
-let input = document.getElementById('input');
-
-let calcul = new Array();
-// let compt = 0;
-
-function borrar() {
-    input.value = '';
-}
-
-
-function introNumero(objecte) {
-    if (objecte.innerHTML == "π") {
-        input.value += Math.PI;
-    } else if (objecte.innerHTML == "e") {
-        input.value += Math.E;
-    } else {
-        input.value += objecte.innerHTML;
+// Función para agregar números
+function appendNumber(number) {
+    if (shouldResetScreen) {
+        resetCalculator();
     }
+
+    // Evitar múltiples ceros a la izquierda
+    if (currentInput === '0' && number === '0') return;
+
+    // Limitar la longitud de la entrada
+    if (currentInput.length >= 12) return;
+
+    currentInput += number;
+    updateDisplay();
 }
 
-function operacio(objecte) {
-    calcul.push(parseFloat(input.value));
-    if (objecte.innerHTML == "=") {
-        for (let i = 0; i < calcul.length; i++) {
-            if (i % 2 == 0) { //--------------------------nombres
-                nombreActual = calcul[i];
-            } else { //-----------------------------------operacions
-                if (calcul[i] == "+") {
-                    resultat = nombreActual + calcul[i + 1]; // Suma 
-                } else if (calcul[i] == "-") {
-                    resultat = nombreActual - calcul[i + 1]; // Resta
-                } else if (calcul[i] == "*") {
-                    resultat = nombreActual * calcul[i + 1]; // Multiplicació
-                } else if (calcul[i] == "/") {
-                    resultat = nombreActual / calcul[i + 1]; // Divisió
-                } else if (calcul[i] == "Ln 10") {
-                    resultat = Math.log10(nombreActual); // Ln 10
-                } else if (calcul[i] == "Sinus") {
-                    resultat = Math.sin(nombreActual); // Sinus
-                } else if (calcul[i] == "Cosinus") {
-                    resultat = Math.cos(nombreActual); // Cosinus
-                } else if (calcul[i] == "Tangent") {
-                    resultat = Math.tan(nombreActual); // Tangent
-                } else if (calcul[i] == "ASinus") {
-                    if (nombreActual > 1 || nombreActual < -1) {
-                        resultat = "Te que ser entre 1 i -1 (NaN)";
-                    } else {
-                        resultat = Math.asin(nombreActual); // Asinus
-                    }
-                } else if (calcul[i] == "Secant") {
-                    resultat = 1 / Math.cos(nombreActual); // Secant
-                } else if (calcul[i] == "Cotangent") {
-                    resultat = 1 / Math.tan(nombreActual); //Cotangent
-                } else if (calcul[i] == "Logartime") {
-                    resultat = Math.log(nombreActual); // Logartime
-                } else if (calcul[i] == "xº") {
-                    resultat = Math.pow(nombreActual, calcul[i + 1]); // xº
-                } else if (calcul[i] == "√") {
-                    resultat = Math.sqrt(nombreActual); // √
-                }
+// Función para agregar constantes
+function appendConstant(constant) {
+    if (shouldResetScreen) {
+        resetCalculator();
+    }
+
+    if (constant === 'π') {
+        currentInput = Math.PI.toString();
+    } else if (constant === 'e') {
+        currentInput = Math.E.toString();
+    }
+
+    updateDisplay();
+}
+
+// Función para agregar operación
+function appendOperation(op) {
+    if (currentInput === '' && previousInput === '') return;
+
+    if (previousInput !== '' && currentInput !== '') {
+        calculate();
+    }
+
+    operation = op;
+    previousInput = currentInput;
+    currentInput = '';
+}
+
+// Función para operaciones especiales (potencia, etc.)
+function setOperation(op) {
+    operation = op;
+    previousInput = currentInput;
+    currentInput = '';
+}
+
+// Función para calcular
+function calculate() {
+    if (operation === null || currentInput === '') return;
+
+    let result;
+    const prev = parseFloat(previousInput);
+    const current = parseFloat(currentInput);
+
+    switch (operation) {
+        case '+':
+            result = prev + current;
+            break;
+        case '-':
+            result = prev - current;
+            break;
+        case '*':
+            result = prev * current;
+            break;
+        case '/':
+            if (current === 0) {
+                result = 'Error: Div/0';
+            } else {
+                result = prev / current;
             }
-        }
-        input.value = resultat;
-        calcul.length = 0;
-    } else {
-        calcul.push(objecte.innerHTML);
-        input.value = '';
+            break;
+        case 'pow':
+            result = Math.pow(prev, current);
+            break;
+        default:
+            return;
     }
+
+    // Formatear el resultado para mostrar
+    currentInput = result.toString();
+    operation = null;
+    previousInput = '';
+    shouldResetScreen = true;
+
+    updateDisplay();
 }
 
+// Función para cálculos con una entrada (funciones)
+function calculateFunction(func) {
+    if (currentInput === '') return;
 
+    const value = parseFloat(currentInput);
+    let result;
 
-
-function mesMenys() {
-    if (input.value.charAt(0) != "-" && input.value != '') {
-        input.value = '-' + input.value;
-    } else if (input.value.charAt(0) == "-" && input.value != '') {
-        input.value = input.value.substring(1);
+    switch (func) {
+        case 'sin':
+            result = Math.sin(value);
+            break;
+        case 'cos':
+            result = Math.cos(value);
+            break;
+        case 'tan':
+            result = Math.tan(value);
+            break;
+        case 'asin':
+            if (value < -1 || value > 1) {
+                result = 'Error: Fuera de rango';
+            } else {
+                result = Math.asin(value);
+            }
+            break;
+        case 'sec':
+            result = 1 / Math.cos(value);
+            break;
+        case 'cot':
+            result = 1 / Math.tan(value);
+            break;
+        case 'log10':
+            if (value <= 0) {
+                result = 'Error: Valor inválido';
+            } else {
+                result = Math.log10(value);
+            }
+            break;
+        case 'ln':
+            if (value <= 0) {
+                result = 'Error: Valor inválido';
+            } else {
+                result = Math.log(value);
+            }
+            break;
+        case 'sqrt':
+            if (value < 0) {
+                result = 'Error: Raíz negativa';
+            } else {
+                result = Math.sqrt(value);
+            }
+            break;
+        default:
+            return;
     }
+
+    currentInput = result.toString();
+    shouldResetScreen = true;
+    updateDisplay();
 }
 
-function arrodonirDalt() {
-    input.value = Math.ceil(input.value);
+// Función para redondear números
+function roundNumber(method) {
+    if (currentInput === '') return;
+
+    const value = parseFloat(currentInput);
+    let result;
+
+    switch (method) {
+        case 'ceil':
+            result = Math.ceil(value);
+            break;
+        case 'floor':
+            result = Math.floor(value);
+            break;
+        case 'round':
+            result = Math.round(value);
+            break;
+        default:
+            return;
+    }
+
+    currentInput = result.toString();
+    updateDisplay();
 }
 
-function arrodonirBaix() {
-    input.value = Math.floor(input.value);
+// Función para agregar punto decimal
+function appendDecimal() {
+    if (shouldResetScreen) {
+        resetCalculator();
+    }
+
+    if (currentInput.includes('.')) return;
+
+    if (currentInput === '') {
+        currentInput = '0';
+    }
+
+    currentInput += '.';
+    updateDisplay();
 }
 
-function arrodonirMitg() {
-    input.value = Math.round(input.value);
+// Función para cambiar signo
+function toggleSign() {
+    if (currentInput === '' || currentInput === '0') return;
+
+    currentInput = (parseFloat(currentInput) * -1).toString();
+    updateDisplay();
 }
+
+// Función para limpiar pantalla
+function clearDisplay() {
+    resetCalculator();
+    updateDisplay();
+}
+
+// Función para resetear calculadora
+function resetCalculator() {
+    currentInput = '';
+    previousInput = '';
+    operation = null;
+    shouldResetScreen = false;
+}
+
+// Función para actualizar display
+function updateDisplay() {
+    display.value = currentInput || '0';
+}
+
+// Inicializar calculadora
+resetCalculator();
+updateDisplay();
+
+// Manejo de eventos de teclado
+document.addEventListener('keydown', function (event) {
+    if (/[0-9]/.test(event.key)) {
+        appendNumber(event.key);
+    } else if (event.key === '.') {
+        appendDecimal();
+    } else if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') {
+        appendOperation(event.key);
+    } else if (event.key === 'Enter' || event.key === '=') {
+        calculate();
+    } else if (event.key === 'Escape') {
+        clearDisplay();
+    } else if (event.key === 'Backspace') {
+        currentInput = currentInput.slice(0, -1);
+        updateDisplay();
+    }
+});

@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Inicializar el formulario
     initContactForm();
+    initCharacterCounter();
 });
 
 /**
@@ -21,6 +22,10 @@ function initContactForm() {
             input.addEventListener('input', function () {
                 if (this.classList.contains('is-invalid')) {
                     this.classList.remove('is-invalid');
+                    const feedback = this.nextElementSibling;
+                    if (feedback && feedback.classList.contains('invalid-feedback')) {
+                        feedback.remove();
+                    }
                 }
             });
         });
@@ -80,6 +85,9 @@ function validateForm() {
     if (!messageInput.value.trim()) {
         showError(messageInput, 'Si us plau, escriu el teu missatge');
         isValid = false;
+    } else if (messageInput.value.length > 500) {
+        showError(messageInput, 'El missatge no pot superar els 500 caràcters');
+        isValid = false;
     }
 
     return isValid;
@@ -126,7 +134,7 @@ function simulateFormSubmission() {
     const originalText = submitButton.innerHTML;
 
     // Cambiar el texto del botón y deshabilitarlo
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviant...';
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Enviant...';
     submitButton.disabled = true;
 
     // Simular retraso de red
@@ -140,18 +148,25 @@ function simulateFormSubmission() {
 
         // Resetear el formulario
         form.reset();
+
+        // Resetear el contador de caracteres
+        const counter = document.querySelector('.form-text');
+        if (counter) {
+            counter.textContent = '0/500';
+            counter.classList.remove('text-danger');
+        }
     }, 1500);
 }
 
 /**
- * Función adicional para mejorar la UX: contar caracteres del mensaje
+ * Función para contar caracteres del mensaje
  */
 function initCharacterCounter() {
     const messageInput = document.getElementById('message');
     if (messageInput) {
         // Crear contador de caracteres
         const counter = document.createElement('small');
-        counter.className = 'form-text text-muted text-right';
+        counter.className = 'form-text text-muted text-end';
         counter.textContent = '0/500';
 
         messageInput.parentNode.appendChild(counter);
@@ -169,6 +184,3 @@ function initCharacterCounter() {
         });
     }
 }
-
-// Inicializar el contador de caracteres cuando el documento esté listo
-document.addEventListener('DOMContentLoaded', initCharacterCounter);

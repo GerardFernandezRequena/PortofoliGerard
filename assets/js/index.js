@@ -1,221 +1,61 @@
-$(document).ready(function () {
-    // Cache de elementos jQuery para mejor performance
-    const $signupSection = $('#signup');
-    const $signinSection = $('#signin');
-    const $showSignup = $('#showSignup');
-    const $showSignin = $('#showSignin');
-    const $registerForm = $('#registerForm');
-    const $loginForm = $('#loginForm');
-    const $registerButton = $('#registerButton');
+// Actualizar la hora en tiempo real
+function updateTime() {
+    const now = new Date();
+    const timeElement = document.getElementById('currentTime');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+}
 
-    // Elementos de contraseña
-    const $toggleLoginPassword = $('#toggleLoginPassword');
-    const $toggleRegPassword = $('#toggleRegPassword');
-    const $toggleRepassPassword = $('#toggleRepassPassword');
-    const $passwd = $('#passwd');
-    const $pass = $('#pass');
-    const $repass = $('#repass');
-    const $passwordStrength = $('#passwordStrength');
-    const $passwordHelp = $('#passwordHelp');
-    const $repassFeedback = $('#repassFeedback');
+// Actualizar la hora cada segundo
+setInterval(updateTime, 1000);
+updateTime(); // Llamar una vez al cargar la página
 
-    // Elementos de validación
-    const $email = $('#email');
-    const $emailFeedback = $('#emailFeedback');
-    const $terms = $('#terms');
-
-    // Inicializar tooltips de Bootstrap
-    $('[data-bs-toggle="tooltip"]').tooltip();
-
-    // Función para cambiar entre formularios
-    function switchForm(showForm, hideForm) {
-        hideForm.addClass('d-none');
-        showForm.removeClass('d-none');
-
-        // Enfocar el primer campo input del formulario mostrado
-        const $firstInput = showForm.find('input:visible:first');
-        if ($firstInput.length) {
-            setTimeout(() => {
-                $firstInput.focus();
-            }, 100);
-        }
-
-        // Scroll suave al formulario
-        $('html, body').animate({
-            scrollTop: showForm.offset().top - 100
-        }, 500);
-    }
-
-    // Event handlers para cambiar entre formularios
-    $showSignup.on('click', function (e) {
+// Añadir smooth scrolling para los enlaces de navegación
+document.querySelectorAll('a.nav-link').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        switchForm($signupSection, $signinSection);
+        const targetId = this.getAttribute('href');
+        if(targetId && targetId !== '#') {
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
+});
 
-    $showSignin.on('click', function (e) {
-        e.preventDefault();
-        switchForm($signinSection, $signupSection);
-    });
-
-    // Funcionalidad para mostrar/ocultar contraseña
-    function setupPasswordToggle(toggleElement, passwordField) {
-        toggleElement.on('click', function () {
-            const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
-            passwordField.attr('type', type);
-
-            // Cambiar icono
-            const icon = toggleElement.find('i');
-            if (type === 'password') {
-                icon.removeClass('bi-eye-slash').addClass('bi-eye');
-            } else {
-                icon.removeClass('bi-eye').addClass('bi-eye-slash');
-            }
-        });
+// Efecto de scroll para la barra de navegación
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+    } else {
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        navbar.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
     }
+});
 
-    // Configurar toggles de contraseña
-    setupPasswordToggle($toggleLoginPassword, $passwd);
-    setupPasswordToggle($toggleRegPassword, $pass);
-    setupPasswordToggle($toggleRepassPassword, $repass);
-
-    // Validar fortaleza de contraseña
-    function checkPasswordStrength(password) {
-        // Al menos 8 caracteres, una mayúscula, una minúscula y un número
-        const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-        const mediumRegex = /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/;
-
-        if (strongRegex.test(password)) {
-            return 'strong';
-        } else if (mediumRegex.test(password)) {
-            return 'medium';
-        } else {
-            return 'weak';
-        }
-    }
-
-    // Visualizar fortaleza de contraseña
-    $pass.on('input', function () {
-        const password = $(this).val();
-        const strength = checkPasswordStrength(password);
-
-        $passwordStrength.removeClass('password-weak password-medium password-strong');
-
-        if (password.length > 0) {
-            switch (strength) {
-                case 'strong':
-                    $passwordStrength.addClass('password-strong');
-                    $passwordHelp.removeClass('text-danger').addClass('text-success');
-                    $passwordHelp.text('Contrasenya segura!');
-                    break;
-                case 'medium':
-                    $passwordStrength.addClass('password-medium');
-                    $passwordHelp.removeClass('text-danger text-success').addClass('text-warning');
-                    $passwordHelp.text('Contrasenya mitjana. Afegeix una majúscula i un número per millorar-la.');
-                    break;
-                case 'weak':
-                    $passwordStrength.addClass('password-weak');
-                    $passwordHelp.removeClass('text-success').addClass('text-danger');
-                    $passwordHelp.text('Contrasenya dèbil. Ha de tenir almenys 8 caràcters, una majúscula, una minúscula i un número.');
-                    break;
-            }
-        } else {
-            $passwordHelp.removeClass('text-danger text-success').addClass('text-muted');
-            $passwordHelp.text('La contrasenya ha de tenir almenys 8 caràcters, una lletra majúscula, una minúscula i un número.');
-        }
-
-        validatePasswords();
+// Animación de aparición para las tarjetas de contacto
+function animateCards() {
+    const cards = document.querySelectorAll('.contact-card');
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 200);
     });
+}
 
-    // Validar coincidencia de contraseñas
-    function validatePasswords() {
-        if ($pass.val() !== $repass.val()) {
-            $repass.addClass('is-invalid');
-            $repassFeedback.text('Les contrasenyes no coincideixen');
-            return false;
-        } else {
-            $repass.removeClass('is-invalid');
-            return true;
-        }
-    }
+// Inicializar la opacidad de las tarjetas
+document.querySelectorAll('.contact-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+});
 
-    $repass.on('input', validatePasswords);
-
-    // Validar email con expresión regular
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-
-    $email.on('blur', function () {
-        if (!validateEmail($email.val())) {
-            $email.addClass('is-invalid');
-            $emailFeedback.text('Si us plau, introdueix un correu electrònic vàlid');
-        } else {
-            $email.removeClass('is-invalid');
-        }
-    });
-
-    // Habilitar/deshabilitar botón de registro según validación
-    function validateRegisterForm() {
-        const isEmailValid = validateEmail($email.val());
-        const isPasswordStrong = checkPasswordStrength($pass.val()) === 'strong';
-        const isPasswordMatch = validatePasswords();
-        const isTermsAccepted = $terms.is(':checked');
-
-        if (isEmailValid && isPasswordStrong && isPasswordMatch && isTermsAccepted) {
-            $registerButton.prop('disabled', false);
-        } else {
-            $registerButton.prop('disabled', true);
-        }
-    }
-
-    // Event listeners para validación en tiempo real
-    $email.on('input', validateRegisterForm);
-    $pass.on('input', validateRegisterForm);
-    $repass.on('input', validateRegisterForm);
-    $terms.on('change', validateRegisterForm);
-
-    // Validación del formulario de registro al enviar
-    $registerForm.on('submit', function (e) {
-        validateRegisterForm();
-
-        if ($registerButton.prop('disabled')) {
-            e.preventDefault();
-
-            // Mostrar mensajes de error
-            if (!validateEmail($email.val())) {
-                $email.addClass('is-invalid');
-                $emailFeedback.text('Si us plau, introdueix un correu electrònic vàlid');
-            }
-
-            if (!validatePasswords()) {
-                $repass.addClass('is-invalid');
-            }
-
-            if (!$terms.is(':checked')) {
-                $terms.addClass('is-invalid');
-            }
-
-            // Scroll to first error
-            const $firstError = $('.is-invalid:first');
-            if ($firstError.length) {
-                $('html, body').animate({
-                    scrollTop: $firstError.offset().top - 100
-                }, 500);
-            }
-        }
-    });
-
-    // Eliminar validación al enfocar
-    $('input').on('focus', function () {
-        $(this).removeClass('is-invalid');
-    });
-
-    // Inicializar validación
-    validateRegisterForm();
-
-    // Ajustar posición de los ojos de contraseña después de la carga
-    setTimeout(function () {
-        $('.password-toggle').css('top', '50%').css('transform', 'translateY(-50%)');
-    }, 100);
+// Ejecutar la animación cuando el documento esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    animateCards();
 });

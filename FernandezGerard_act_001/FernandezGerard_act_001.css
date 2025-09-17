@@ -1,42 +1,112 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    background: brown;
-}
-
-.formulari {
-    background: gray;
-    width: 500px;
-    max-width: 100%;
-    margin: auto;
-    margin-top: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #8e44ad, #3498db);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
-    box-shadow: 20px;
-    position: relative;
-    text-align: center;
-    border: 3px solid black;
 }
 
-.input {
-    margin-left: 35%;
+.container {
+    width: 100%;
+    max-width: 500px;
     text-align: center;
-    display: block;
-    width: 30%;
-    font-size: 1.3em;
-}
-
-.boton {
-    margin-top: 5%;
-    margin-right: 10px;
-    font-size: 1.2em;
 }
 
 h1 {
-    width: 500px;
-    margin: auto;
-    margin-top: 3%;
-    padding-left: 12%;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.formulario {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.botones {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.boton {
+    padding: 15px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.operador {
+    background-color: #3498db;
+    color: white;
+}
+
+.operador:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+.resultado {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border-left: 5px solid #3498db;
+}
+
+#valorResultado {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+@media (max-width: 576px) {
+    .formulario {
+        padding: 20px;
+    }
+
+    .botones {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,126 +1,258 @@
-html,
-body {
-    margin: 0px;
-    height: 100%;
+/* Variables globals */
+:root {
+    --color-primary: rgba(0, 162, 255, 0.555);
+    --color-weekend: rgba(255, 0, 0, 0.486);
+    --color-today: rgba(4, 214, 14, 0.486);
+    --color-header: #4a5568;
+    --color-text: #2d3748;
+    --color-white: #ffffff;
+    --color-modal-bg: rgba(0, 0, 0, 0.459);
 }
 
+/* Reset i estils generals */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: var(--color-text);
+}
+
+/* Capçalera */
+header {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--color-header);
+    color: var(--color-white);
+}
+
+/* Contenidor principal */
+.calendar-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Controls del calendari */
+.calendar-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0 1rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Taula del calendari */
 #calendari {
     width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 caption {
-    height: 40px;
-    line-height: 40px;
-    font-size: 150%;
-}
-
-.next {
-    position: absolute;
-    margin-top: -12px;
-    margin-left: 55%;
-    margin-right: 30%;
-}
-
-.prev {
-    position: absolute;
-    margin-top: -5px;
-    margin-left: 41.7%;
-    margin-right: 30%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    caption-side: top;
+    text-align: center;
+    background-color: var(--color-header);
+    color: var(--color-white);
 }
 
 thead {
-    background-color: gray;
-    color: white;
-    padding-bottom: 50%;
+    background-color: var(--color-header);
+    color: var(--color-white);
 }
 
-tbody {
-    background-color: white;
-    color: black;
-}
-
+th,
 td {
-    width: 10%;
+    padding: 0.75rem;
     text-align: center;
+    border: 1px solid #e2e8f0;
 }
 
-.vermell {
-    background-color: rgba(255, 0, 0, 0.486);
-    width: 10%;
-    padding-bottom: 10px;
-    text-align: center;
+th {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+/* Estils de les cel·les del calendari */
+.calendar-day {
+    height: 80px;
     vertical-align: top;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.blau {
-    background-color: rgba(0, 162, 255, 0.555);
-    width: 10%;
-    padding-bottom: 10px;
-    text-align: center;
-    vertical-align: top;
+.calendar-day:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
-.noteStyle {
-    border: dotted 2px white;
+.weekday {
+    background-color: var(--color-primary);
 }
 
-.verd {
-    background-color: rgba(4, 214, 14, 0.486);
-    width: 10%;
-    padding-bottom: 10px;
-    text-align: center;
-    vertical-align: top;
+.weekend {
+    background-color: var(--color-weekend);
 }
 
-.white {
-    background-color: white;
-    color: white;
-    width: 10%;
-    padding-bottom: 10px;
-    text-align: center;
-    vertical-align: top;
+.today {
+    background-color: var(--color-today);
+    font-weight: bold;
 }
 
-.greyNotes {
-    justify-content: center;
-    align-items: center;
+.empty-day {
+    background-color: #f7fafc;
+}
+
+/* Estils per a les notes */
+.has-note {
+    border: 2px dotted var(--color-white);
+    position: relative;
+}
+
+.note-indicator {
+    display: block;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    color: var(--color-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Modal d'notes */
+.modal {
     display: none;
-    border: solid;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.459);
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-}
-
-.whiteNotes {
-    background-color: white;
-    border-radius: 25px;
-    border: solid;
-    display: flex;
-    width: 400px;
-    height: 200px;
-    flex-direction: column;
-    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-modal-bg);
     justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.boto {
-    margin-top: 2px;
-    background-color: white;
-    border-radius: 5px;
-    border: solid 1px;
+.modal-content {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
 }
 
-.inputnota {
-    margin-top: -20px;
-    background-color: white;
-    border-radius: 4px;
-    border: solid 1px;
-}
-
-.diaclicat {
+.modal-header {
     text-align: center;
-    margin-top: -20px;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+    margin: 0 0 0.5rem 0;
+}
+
+.selected-date {
+    margin: 0;
+    font-weight: normal;
+    color: #718096;
+}
+
+.modal-body {
+    margin-bottom: 1.5rem;
+}
+
+.note-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+/* Botons */
+.btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    background-color: var(--color-white);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background-color: #f7fafc;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: rgba(0, 162, 255, 0.7);
+}
+
+.btn-danger {
+    background-color: var(--color-weekend);
+    color: var(--color-white);
+    border-color: var(--color-weekend);
+}
+
+.btn-danger:hover {
+    background-color: rgba(255, 0, 0, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    th,
+    td {
+        padding: 0.5rem;
+    }
+
+    .calendar-day {
+        height: 60px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
 }
